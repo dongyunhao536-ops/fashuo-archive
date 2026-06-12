@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>法硕 APP · 极简暗色版（Apple HIG）</title>
+<style>
+  /* ===================================================================
+     极简暗色 / Apple HIG 风格
+     设计原则：
+       1. 颜色：背景 #000，卡片 #1c1c1e，二级卡片 #2c2c2e
+       2. 文字：3 档灰阶（#f5f5f7 / 60% / 30%），权重靠字号+字重不靠色
+       3. 强调色：systemBlue 暗模 #0a84ff —— 全屏唯一彩色，按钮+激活态用
+       4. 状态色：仅在评分结果出现（绿/橙/红），其他场景一律灰阶
+       5. 图标：极少。tab bar 用 SF Symbols 单线风格；正文几乎无 emoji
+       6. 分隔：1px hairline = rgba(255,255,255,0.08)
+       7. 圆角：12-14px 卡片 / 8-10px 内嵌 / 22px 主按钮（iOS pill）
+       8. 字体：-apple-system → iPhone 自动用 SF Pro/苹方
+     =================================================================== */
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+                 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    color: #f5f5f7;
+    -webkit-font-smoothing: antialiased;
+    padding: 40px 24px 80px;
+  }
+
+  h1.page-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #f5f5f7;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  p.page-sub {
+    font-size: 13px;
+    color: rgba(235,235,245,0.5);
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  /* ============ iPhone 框架 ============ */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(390px, 1fr));
+    gap: 48px 32px;
+    max-width: 1760px;
+    margin: 0 auto;
+  }
+  .phone-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .phone-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(235,235,245,0.6);
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+  }
+  .phone-label .idx {
+    color: rgba(235,235,245,0.3);
+    margin-right: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .phone {
+    width: 390px;
+    height: 844px;
+    background: #000;
+    border-radius: 48px;
+    padding: 14px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06),
+                0 30px 60px rgba(0,0,0,0.6);
+    position: relative;
+  }
+  .screen {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  /* 状态栏 */
+  .status-bar {
+    height: 50px;
+    padding: 18px 30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #f5f5f7;
+    flex-shrink: 0;
+  }
+  .status-bar .right { display: flex; gap: 6px; align-items: center; }
+  .status-bar svg { width: 16px; height: 11px; fill: #f5f5f7; }
+  /* 灵动岛 */
+  .island {
+    position: absolute;
+    top: 22px; left: 50%; transform: translateX(-50%);
+    width: 124px; height: 34px;
+    background: #000; border-radius: 20px;
+  }
+
+  /* ============ 通用元素 ============ */
+  .nav-bar {
+    padding: 8px 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    flex-shrink: 0;
+  }
+  .nav-bar .nav-title {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .nav-bar .nav-back {
+    font-size: 17px;
+    color: #0a84ff;
+    cursor: pointer;
+  }
+  .nav-bar .nav-action {
+    font-size: 17px;
+    color: #0a84ff;
+  }
+  .large-title {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    padding: 4px 20px 12px;
+    color: #f5f5f7;
+  }
+
+  .content {
+    flex: 1;
+    overflow: hidden;
+    padding-bottom: 12px;
+  }
+
+  /* iOS grouped list */
+  .group {
+    background: #1c1c1e;
+    margin: 0 16px 24px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .group-header {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(235,235,245,0.55);
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    padding: 18px 32px 8px;
+    margin-top: -8px;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    min-height: 44px;
+  }
+  .row:last-child { border-bottom: none; }
+  .row .main { flex: 1; }
+  .row .main .t1 { font-size: 17px; font-weight: 400; color: #f5f5f7; }
+  .row .main .t2 { font-size: 13px; color: rgba(235,235,245,0.55); margin-top: 2px; }
+  .row .right {
+    font-size: 17px;
+    color: rgba(235,235,245,0.55);
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .row .chevron {
+    color: rgba(235,235,245,0.3);
+    font-size: 14px;
+    margin-left: 4px;
+  }
+
+  /* Pill 按钮 */
+  .btn-primary {
+    background: #0a84ff;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    border: none;
+    border-radius: 14px;
+    padding: 16px 24px;
+    width: 100%;
+    cursor: pointer;
+  }
+  .btn-secondary {
+    background: rgba(120,120,128,0.24);
+    color: #f5f5f7;
+    font-size: 17px;
+    font-weight: 500;
+    border: none;
+    border-radius: 14px;
+    padding: 14px 20px;
+    cursor: pointer;
+  }
+  .btn-text {
+    background: transparent;
+    color: #0a84ff;
+    font-size: 17px;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* 底栏 tab：4 个图标 + 中心圆 */
+  .tabbar {
+    height: 84px;
+    background: rgba(28,28,30,0.92);
+    backdrop-filter: blur(20px);
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: flex-start;
+    padding: 8px 0 0;
+    flex-shrink: 0;
+  }
+  .tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 0;
+    cursor: pointer;
+  }
+  .tab svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: rgba(235,235,245,0.55);
+    stroke-width: 1.8;
+  }
+  .tab .label {
+    font-size: 10px;
+    color: rgba(235,235,245,0.55);
+    letter-spacing: 0.2px;
+  }
+  .tab.active svg { stroke: #0a84ff; }
+  .tab.active .label { color: #0a84ff; }
+
+  /* hero countdown 卡 */
+  .hero-card {
+    margin: 4px 16px 16px;
+    background: linear-gradient(180deg, #1c1c1e, #161618);
+    border-radius: 14px;
+    padding: 20px;
+    border: 0.5px solid rgba(255,255,255,0.06);
+  }
+  .hero-card .label {
+    font-size: 13px;
+    color: rgba(235,235,245,0.55);
+    margin-bottom: 4px;
+  }
+  .hero-card .days {
+    font-size: 42px;
+    font-weight: 700;
+    color: #f5f5f7;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .hero-card .days span {
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(235,235,245,0.55);
+    margin-left: 6px;
+  }
+  .hero-card .meta {
+    margin-top: 14px;
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: rgba(235,235,245,0.55);
+  }
+  .hero-card .meta b {
+    color: #f5f5f7;
+    font-weight: 500;
+    margin-right: 4px;
+  }
+
+  /* segmented control */
+  .segmented {
+    display: flex;
+    margin: 4px 16px 16px;
+    background: rgba(120,120,128,0.18);
+    border-radius: 9px;
+    padding: 2px;
+  }
+  .segmented .seg {
+    flex: 1;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(235,235,245,0.65);
+    padding: 7px 0;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+  .segmented .seg.active {
+    background: rgba(120,120,128,0.5);
+    color: #f5f5f7;
+  }
+
+  /* chat */
+  .bubble {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    word-break: break-word;
+  }
+  .bubble.user {
+    background: #0a84ff;
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .bubble.ai {
+    background: #1c1c1e;
+    color: #f5f5f7;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px;
+    overflow: hidden;
+  }
+  .input-bar {
+    padding: 8px 12px 12px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .input-bar .field {
+    flex: 1;
+    background: #1c1c1e;
+    border-radius: 18px;
+    padding: 9px 14px;
+    font-size: 15px;
+    color: rgba(235,235,245,0.5);
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+  }
+  .input-bar .send {
+    background: #0a84ff;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  /* 进度环 */
+  .ring-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0 16px;
+  }
+  .ring {
+    width: 132px; height: 132px;
+    position: relative;
+  }
+  .ring svg { transform: rotate(-90deg); }
+  .ring circle.bg { stroke: rgba(255,255,255,0.08); stroke-width: 8; fill: none; }
+  .ring circle.fg { stroke: #0a84ff; stroke-width: 8; fill: none; stroke-linecap: round; }
+  .ring .center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .ring .num {
+    font-size: 32px;
+    font-weight: 600;
+    color: #f5f5f7;
+    letter-spacing: -0.5px;
+  }
+  .ring .tag {
+    font-size: 11px;
+    color: rgba(235,235,245,0.55);
+    margin-top: 2px;
+  }
+
+  /* 评分结果区 */
+  .grade-card {
+    margin: 8px 16px 20px;
+    background: #1c1c1e;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+  .grade-card .grade {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .grade-card .conf {
+    font-size: 13px;
+    color: rgba(235,235,245,0.55);
+    margin-top: 4px;
+  }
+  .grade-pass { color: #30d158; }
+  .grade-mid { color: #ff9f0a; }
+  .grade-fail { color: #ff453a; }
+
+  /* 内联标签 */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    background: rgba(120,120,128,0.24);
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(235,235,245,0.85);
+    margin-right: 6px;
+  }
+  .pill.blue { background: rgba(10,132,255,0.18); color: #5ab2ff; }
+  .pill.green { background: rgba(48,209,88,0.18); color: #66dd86; }
+  .pill.red { background: rgba(255,69,58,0.18); color: #ff7468; }
+
+  /* 登录页 */
+  .login-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 32px 80px;
+  }
+  .login-stage .brand {
+    width: 86px; height: 86px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 24px rgba(10,132,255,0.18);
+  }
+  .login-stage .brand .ch {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .login-stage .brand .sub {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+  .login-stage .title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .login-stage .desc {
+    font-size: 14px;
+    color: rgba(235,235,245,0.55);
+    margin-bottom: 32px;
+  }
+  .login-stage .pwd-field {
+    width: 100%;
+    background: #1c1c1e;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 17px;
+    color: rgba(235,235,245,0.4);
+    margin-bottom: 12px;
+  }
+  .login-stage .login-btn {
+    width: 100%;
+  }
+
+  /* 答题页 */
+  .q-card {
+    margin: 8px 16px 16px;
+    background: #1c1c1e;
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .q-card .kp {
+    font-size: 12px;
+    color: rgba(235,235,245,0.55);
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .q-card .q-text {
+    font-size: 17px;
+    line-height: 1.5;
+    color: #f5f5f7;
+  }
+  .answer-input {
+    margin: 0 16px;
+    background: #1c1c1e;
+    border-radius: 14px;
+    padding: 14px 16px;
+    min-height: 160px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgba(235,235,245,0.5);
+    border: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .answer-input .typing {
+    color: #f5f5f7;
+  }
+  .answer-input .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 18px;
+    background: #0a84ff;
+    margin-left: 1px;
+    vertical-align: middle;
+    animation: blink 1s infinite;
+  }
+  @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+
+  /* 教练 */
+  .coach-section {
+    margin: 0 16px 14px;
+    background: #1c1c1e;
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .coach-section .head {
+    font-size: 13px;
+    color: rgba(235,235,245,0.55);
+    margin-bottom: 6px;
+    letter-spacing: 0.2px;
+  }
+  .coach-section .body {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #f5f5f7;
+  }
+  .coach-section.accent {
+    border-left: 3px solid #0a84ff;
+  }
+  .coach-three {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .coach-three .opt {
+    flex: 1;
+    text-align: center;
+    background: rgba(120,120,128,0.18);
+    padding: 8px 0;
+    border-radius: 10px;
+    font-size: 13px;
+    color: rgba(235,235,245,0.85);
+  }
+  .coach-three .opt.selected {
+    background: rgba(10,132,255,0.16);
+    color: #5ab2ff;
+  }
+
+  /* SCROLL hint */
+  ::-webkit-scrollbar { display: none; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">法硕 APP · 极简暗色版</h1>
+<p class="page-sub">Apple HIG · iPhone 15 / 390 × 844 · 仅 systemBlue 一种强调色</p>
+
+<div class="grid">
+
+<!-- ============================================================
+     ① 登录
+     ============================================================ -->
+<div class="phone-wrap">
+  <div class="phone-label"><span class="idx">01</span>登录</div>
+  <div class="phone">
+    <div class="island"></div>
+    <div class="screen">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="right">
+          <svg viewBox="0 0 18 11"><path d="M1 5h2v6H1zM5 3h2v8H5zM9 1h2v10H9zM13 4h2v7h-2z"/></svg>
+        </span>
+      </div>
+      <div class="login-stage">
+        <div class="brand">
+          <div class="ch">法</div>
+          <div class="sub">备考</div>
+        </div>
+        <div class="title">法硕备考</div>
+        <div class="desc">输入口令进入</div>
+        <div class="pwd-field">••••••••</div>
+        <button class="btn-primary login-btn">进入</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ② 仪表盘
+     ============================================================ -->
+<div class="phone-wrap">
+  <div class="phone-label"><span class="idx">02</span>仪表盘（首页）</div>
+  <div class="phone">
+    <div class="island"></div>
+    <div class="screen">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="right">
+          <svg viewBox="0 0 18 11"><path d="M1 5h2v6H1zM5 3h2v8H5zM9 1h2v10H9zM13 4h2v7h-2z"/></svg>
+        </span>
+      </div>
+      <div class="large-title">今日</div>
+
+      <div class="content">
+        <!-- 倒计时 -->
+        <div class="hero-card">
+          <div class="label">距 2026 年 12 月 21 日</div>
+          <div class="days">195<span>天</span></div>
+          <div class="meta">
+            <div><b>933</b>考点</div>
+            <div><b>178</b>已掌握</div>
+            <div><b>19%</b></div>
+          </div>
+        </div>
+
+        <!-- 今日清单 -->
+        <div class="group-header">今日 · 6 月 9 日</div>
+        <div class="group">
+          <div class="row">
+            <div class="main">
+              <div class="t1">背诵清单</div>
+              <div class="t2">复验 2 · 到期 5 · 新考点 3</div>
+            </div>
+            <span class="right">10</span>
+            <span class="chevron">›</span>
+          </div>
+          <div class="row">
+            <div class="main">
+              <div class="t1">易混对决</div>
+              <div class="t2">高空抛物 vs 过失致死 等 3 对</div>
+            </div>
+            <span class="right">3</span>
+            <span class="chevron">›</span>
+          </div>
+          <div class="row">
+            <div class="main">
+              <div class="t1">待办筐</div>
+              <div class="t2">8 项候选待你确认</div>
+            </div>
+            <span class="right" style="color:#0a84ff;">8</span>
+            <span class="chevron">›</span>
+          </div>
+        </div>
+
+        <!-- 弱项 -->
+        <div class="group-header">最需要攻克</div>
+        <div class="group">
+          <div class="row">
+            <div class="main">
+              <div class="t1">价款超级优先权也优先于质权</div>
+              <div class="t2">民法 · 错 3 次 · 卷三 50</div>
+            </div>
+            <span class="chevron">›</span>
+          </div>
+          <div class="row">
+            <div class="main">
+              <div class="t1">解约定金的约定本身生效</div>
+              <div class="t2">民法 · 错 2 次 · 卷三 36</div>
+            </div>
+            <span class="chevron">›</span>
+          </div>
+          <div class="row">
+            <div class="main">
+              <div class="t1">破坏交通设施 vs 危公罪</div>
+              <div class="t2">刑法 · 错 2 次 · 卷三 16</div>
+            </div>
+            <span class="chevron">›</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底栏 -->
+      <div class="tabbar">
+        <div class="tab active">
+          <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 9v11h14V9" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          <span class="label">今日</span>
+        </div>
+        <div class="tab">
+          <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5" stroke-linecap="round"/></svg>
+          <span class="label">背诵</span>
+        </div>
+        <div class="tab">
+          <svg viewBox="0 0 24 24"><path d="M21 11c0 4.5-4 8-9 8a9 9 0 01-3-.5L4 20l1-4a8 8 0 01-2-5c0-4.5 4-8 9-8s9 3.5 9 8z" stroke-linejoin="round"/></svg>
+          <span class="label">答疑</span>
+        </div>
+        <div class="tab">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v4M16 4v4M3 11h18" stroke-linecap="round"/></svg>
+          <span class="label">教练</span>
+        </div>
+        <div class="tab">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          <span class="label">弱项</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ③ 背诵 · 今日清单
+     ============================================================ -->
+<div class="phone-wrap">
+  <div class="phone-label"><span class="idx">03</span>背诵 · 今日清单</div>
+  <div class="phone">
+    <div class="island"></div>
+    <div class="screen">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="right">
+          <svg viewBox="0 0 18 11"><path d="M1 5h2v6H1zM5 3h2v8H5zM9 1h2v10H9zM13 4h2v7h-2z"/></svg>
+        </span>
+      </div>
+      <div class="large-title">背诵</div>
+
+      <div class="content">
+        <!-- 进度环 -->
+        <div class="ring-wrap">
+          <div class="ring">
+            <svg width="132" height="132">
+              <circle class="bg" cx="66" cy="66" r="58"/>
+              <circle class="fg" cx="66" cy="66" r="58"
+                      stroke-dasharray="364" stroke-dashoffset="240"/>
+            </svg>
+            <div class="center">
+              <div class="num">3<span style="font-size:18px;color:rgba(235,235,245,0.55);">/10</span></div>
+              <div class="tag">今日已完成</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="group-header">复验 · 优先消费</div>
+        <div class="group">
+          <div class="row">
+            <div class="main">
+              <div class="t1">绑架罪共犯认定</div>
+              <div class="t2">刑法 · 答疑标记需复验</div>
+            </div>
+            <span class="pill blue">L2</span>
+            <span class="chevron">›</span>
+          </div>
+          <div class="row">
+            <div class="main">
+              <div class="t1">指示交付的所有权转移</div>
+              <div class="t2">民法 · 间隔 7 天到期</div>
+            </div>
+            <span class="pill blue">L2</span>
+            <span class="chevron">›</span>
+          </div>
+        </div>
+
+        <div class="group-header">到期复习</div>
+        <div class="group">
+          <div class="row">
+            <div class="main">
+              <div class="t1">正当防卫的成立条件</div>
+              <div class="t2">刑法 · 间隔 15 天到期</div>
+            </div>
+            <span class="pill">L1</span>
+            <span class="chevron">›</span>
+          </div>
+          <div class="row">
+            <div class="main">
+              <div class="t1">代位继承的范围</div>
+              <div class="t2">民法 · 间隔 7 天到期</div>
+            </div>
+            <span class="pill blue">L2</span>
+            <span class="chevron">›</span>
+          </div>
+          <div class="row">
+            <div class="main">
+              <div class="t1">想象竞合犯的处断</div>
+              <div class="t2">刑法 · 间隔 3 天到期</div>
+            </div>
+            <span class="pill">L1</span>
+            <span class="chevron">›</span>
+          </div>
+        </div>
+
+        <div class="group-header">新考点</div>
+        <div class="group">
+          <div class="row">
+            <div class="main">
+              <div class="t1">妨害安全驾驶罪</div>
+              <div class="t2">刑法 · 真题频率：高</div>
+            </div>
+            <span class="pill">L1</span>
+            <span class="chevron">›</span>
+          </div>
+          <div class="row">
+            <div class="main">
+              <div class="t1">监护人赔偿请求权</div>
+              <div class="t2">民法 · 真题频率：中</div>
+            </div>
+            <span class="pill">L1</span>
+            <span class="chevron">›</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabbar">
+        <div class="tab">
+          <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 9v11h14V9" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          <span class="label">今日</span>
+        </div>
+        <div class="tab active">
+          <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5" stroke-linecap="round"/></svg>
+          <span class="label">背诵</span>
+        </div>
+        <div class="tab">
+          <svg viewBox="0 0 24 24"><path d="M21 11c0 4.5-4 8-9 8a9 9 0 01-3-.5L4 20l1-4a8 8 0 01-2-5c0-4.5 4-8 9-8s9 3.5 9 8z" stroke-linejoin="round"/></svg>
+          <span class="label">答疑</span>
+        </div>
+        <div class="tab">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v4M16 4v4M3 11h18" stroke-linecap="round"/></svg>
+          <span class="label">教练</span>
+        </div>
+        <div class="tab">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          <span class="label">弱项</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ④ 背诵 · 答题
+     ============================================================ -->
+<div class="phone-wrap">
+  <div class="phone-label"><span class="idx">04</span>背诵 · 答题</div>
+  <div class="phone">
+    <div class="island"></div>
+    <div class="screen">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="right">
+          <svg viewBox="0 0 18 11"><path d="M1 5h2v6H1zM5 3h2v8H5zM9 1h2v10H9zM13 4h2v7h-2z"/></svg>
+        </span>
+      </div>
+      <div class="nav-bar">
+        <span class="nav-back">‹ 清单</span>
+        <span class="nav-title">L2 · 简答</span>
+        <span style="font-size:13px;color:rgba(235,235,245,0.4);">3 / 10</span>
+      </div>
+
+      <div class="content">
+        <div style="padding: 8px 16px 16px;">
+          <div class="segmented" style="margin: 0 0 14px;">
+            <div class="seg">编码</div>
+            <div class="seg active">作答</div>
+            <div class="seg">评分</div>
+          </div>
+        </div>
+
+        <div class="q-card">
+          <div class="kp">XF-0039 · 正当防卫</div>
+          <div class="q-text">简述正当防卫的概念及其成立条件。</div>
+        </div>
+
+        <div style="padding: 0 16px 12px; font-size:13px; color:rgba(235,235,245,0.55);">作答（中文，不限字数）</div>
+        <div class="answer-input">
+          <span class="typing">正当防卫是为了使国家、公共利益、本人或者他人的人身、财产和其他权利免受正在进行的不法侵害，而对不法侵害人造成损害的</span><span class="cursor"></span>
+        </div>
+
+        <div style="padding: 16px;">
+          <button class="btn-primary">提交评分</button>
+          <button class="btn-text" style="width:100%;margin-top:4px;padding:12px 0;">放弃这题</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ⑤ 背诵 · 评分结果
+     ============================================================ -->
+<div class="phone-wrap">
+  <div class="phone-label"><span class="idx">05</span>背诵 · 评分结果</div>
+  <div class="phone">
+    <div class="island"></div>
+    <div class="screen">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="right">
+          <svg viewBox="0 0 18 11"><path d="M1 5h2v6H1zM5 3h2v8H5zM9 1h2v10H9zM13 4h2v7h-2z"/></svg>
+        </span>
+      </div>
+      <div class="nav-bar">
+        <span class="nav-back">‹ 清单</span>
+        <span class="nav-title">L2 · 评分</span>
+        <span style="font-size:13px;color:rgba(235,235,245,0.4);">XF-0039</span>
+      </div>
+
+      <div class="content" style="overflow-y:auto;">
+        <div class="grade-card">
+          <div class="grade grade-pass">干净通过</div>
+          <div class="conf">信心度 92% · 间隔档 7 → 15 天</div>
+        </div>
+
+        <div class="group-header">命中要点</div>
+        <div class="group">
+          <div class="row" style="min-height:36px;">
+            <div class="main"><div class="t1" style="font-size:15px;">起因：存在不法侵害</div></div>
+            <span style="color:#30d158;font-size:14px;">✓</span>
+          </div>
+          <div class="row" style="min-height:36px;">
+            <div class="main"><div class="t1" style="font-size:15px;">时间：正在进行</div></div>
+            <span style="color:#30d158;font-size:14px;">✓</span>
+          </div>
+          <div class="row" style="min-height:36px;">
+            <div class="main"><div class="t1" style="font-size:15px;">对象：不法侵害人本人</div></div>
+            <span style="color:#30d158;font-size:14px;">✓</span>
+          </div>
+          <div class="row" style="min-height:36px;">
+            <div class="main"><div class="t1" style="font-size:15px;">主观：防卫意图</div></div>
+            <span style="color:#30d158;font-size:14px;">✓</span>
+          </div>
+          <div class="row" style="min-height:36px;">
+            <div class="main"><div class="t1" style="font-size:15px;">限度：未明显超过必要限度</div></div>
+            <span style="color:#30d158;font-size:14px;">✓</span>
+          </div>
+        </div>
+
+        <div class="group-header">教材锚</div>
+        <div class="group">
+          <div class="row">
+            <div class="main">
+              <div class="t1" style="font-size:15px;">考试分析 · 第 247 页</div>
+              <div class="t2">行 1983 - 2052</div>
+            </div>
+            <span class="chevron">›</span>
+          </div>
+        </div>
+
+        <div style="padding: 12px 16px 20px;">
+          <button class="btn-primary">下一题</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ⑥ 答疑
+     ============================================================ -->
+<div class="phone-wrap">
+  <div class="phone-label"><span class="idx">06</span>答疑</div>
+  <div class="phone">
+    <div class="island"></div>
+    <div class="screen">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="right">
+          <svg viewBox="0 0 18 11"><path d="M1 5h2v6H1zM5 3h2v8H5zM9 1h2v10H9zM13 4h2v7h-2z"/></svg>
+        </span>
+      </div>
+      <div class="nav-bar">
+        <span class="nav-action">‹</span>
+        <span class="nav-title">答疑</span>
+        <span class="nav-action" style="font-size:14px;">民法</span>
+      </div>
+
+      <div class="chat-area">
+        <div class="bubble user">
+          卷三 50 题为什么 A 选项错？我以为价款超级优先权只优先于抵押权。
+        </div>
+        <div class="bubble ai">
+          <b>结论</b>：416 条明文"价款债权优先于抵押权人、<b>质权人</b>等其他担保物权人受偿"——也优先于质权，A 错的是漏掉"质权"。
+          <br><br>
+          <b>教材锚</b>：民法学 3348 行 · 担保物权章
+          <br>
+          <b>真题脉络</b>：2021-50 / 2024-51 同款踩坑
+          <br>
+          <b>信心度</b> 94%
+        </div>
+        <div style="align-self:flex-start; font-size:11px; color:rgba(235,235,245,0.35); margin-top:2px;">¥0.31 · 12 行教材引证</div>
+        <div class="bubble user">
+          那如果质押 + 抵押同时存在呢？
+        </div>
+        <div style="align-self:flex-start; padding: 8px 14px; color:rgba(235,235,245,0.4); font-size:14px;">···</div>
+      </div>
+
+      <div class="input-bar">
+        <div class="field">输入你的疑问，Ctrl + 回车发送</div>
+        <div class="send">↑</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ⑦ 教练
+     ============================================================ -->
+<div class="phone-wrap">
+  <div class="phone-label"><span class="idx">07</span>教练</div>
+  <div class="phone">
+    <div class="island"></div>
+    <div class="screen">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="right">
+          <svg viewBox="0 0 18 11"><path d="M1 5h2v6H1zM5 3h2v8H5zM9 1h2v10H9zM13 4h2v7h-2z"/></svg>
+        </span>
+      </div>
+      <div class="large-title">教练</div>
+
+      <div class="content" style="overflow-y:auto;">
+        <div class="hero-card" style="padding:14px 18px;">
+          <div class="label">你刚才说</div>
+          <div style="font-size:15px;color:#f5f5f7;margin-top:4px;line-height:1.5;">
+            今天复习刑法第 5 章共同犯罪，听课的时候因果关系那块没太懂。
+          </div>
+        </div>
+
+        <div class="coach-section">
+          <div class="head">即时点拨</div>
+          <div class="body">
+            因果关系按"条件说 + 客观归责"两段判断：先用"无 A 则无 B"建立条件关系，再判介入因素是否中断。<b>必做题</b>：2018-15、2020 案例 57 第 2 问。
+          </div>
+        </div>
+
+        <div class="coach-section">
+          <div class="head">进度归位</div>
+          <div class="body">
+            刑法总论 5/15 章 · 第一轮进度 33%。按 9-1 切高频死线，本月需完成至第 9 章。
+          </div>
+        </div>
+
+        <div class="coach-section accent">
+          <div class="head">下一步规划建议</div>
+          <div class="body">
+            明天继续刑法第 6 章「故意与过失」+ 配套真题 5 道。共同犯罪的因果关系并入第 7 章一起复盘，不要单独再花时间。
+          </div>
+          <div class="coach-three">
+            <div class="opt selected">采纳</div>
+            <div class="opt">改一改</div>
+            <div class="opt">不按</div>
+          </div>
+        </div>
+
+        <div class="coach-section">
+          <div class="head">复盘</div>
+          <div class="body" style="color:rgba(235,235,245,0.7);">
+            "因果关系没太懂"已加入待办筐（弱项候选），等你 PC 端登记。
+          </div>
+        </div>
+      </div>
+
+      <div class="input-bar">
+        <div class="field">说说今天学什么、卡在哪里…</div>
+        <div class="send">↑</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ⑧ 待办筐
+     ============================================================ -->
+<div class="phone-wrap">
+  <div class="phone-label"><span class="idx">08</span>待办筐（待你确认）</div>
+  <div class="phone">
+    <div class="island"></div>
+    <div class="screen">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="right">
+          <svg viewBox="0 0 18 11"><path d="M1 5h2v6H1zM5 3h2v8H5zM9 1h2v10H9zM13 4h2v7h-2z"/></svg>
+        </span>
+      </div>
+      <div class="nav-bar">
+        <span class="nav-back">‹</span>
+        <span class="nav-title">待办筐</span>
+        <span style="font-size:13px;color:rgba(235,235,245,0.4);">8 项</span>
+      </div>
+
+      <div class="content" style="overflow-y:auto;">
+        <div style="padding: 4px 20px 16px; font-size:13px; color:rgba(235,235,245,0.5); line-height:1.5;">
+          答疑、教练、检测中沉淀的候选。"收下"后会在你 PC 端登记进档案。
+        </div>
+
+        <div class="group-header">弱项候选 · 4</div>
+        <div class="group">
+          <div class="row" style="padding:14px 16px;">
+            <div class="main">
+              <div class="t1" style="font-size:15px;">价款超级优先权也优先于质权</div>
+              <div class="t2">民法 · 答疑 · 民法学 3348 行</div>
+              <div style="margin-top:8px;display:flex;gap:8px;">
+                <button class="btn-secondary" style="padding:6px 16px;font-size:13px;">收下</button>
+                <button class="btn-text" style="padding:6px 4px;font-size:13px;">忽略</button>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="padding:14px 16px;">
+            <div class="main">
+              <div class="t1" style="font-size:15px;">因果关系中断的判断标准</div>
+              <div class="t2">刑法 · 复盘 · 今日教练</div>
+              <div style="margin-top:8px;display:flex;gap:8px;">
+                <button class="btn-secondary" style="padding:6px 16px;font-size:13px;">收下</button>
+                <button class="btn-text" style="padding:6px 4px;font-size:13px;">忽略</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="group-header">心得候选 · 2</div>
+        <div class="group">
+          <div class="row" style="padding:14px 16px;">
+            <div class="main">
+              <div class="t1" style="font-size:15px;">"明知 + 他人正在犯罪" = 共犯成立预警</div>
+              <div class="t2">刑法 · 答疑 · 需真题二次背书</div>
+              <div style="margin-top:8px;display:flex;gap:8px;">
+                <button class="btn-secondary" style="padding:6px 16px;font-size:13px;">收下</button>
+                <button class="btn-text" style="padding:6px 4px;font-size:13px;">忽略</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="group-header">复验请求 · 2（自动入清单）</div>
+        <div class="group">
+          <div class="row" style="min-height:48px;">
+            <div class="main">
+              <div class="t1" style="font-size:15px;">XF-0042 共同犯罪 · 故意要件</div>
+              <div class="t2">明日清单首位</div>
+            </div>
+            <span class="pill blue">已排入</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /.grid -->
+
+<p style="text-align:center; color:rgba(235,235,245,0.3); font-size:12px; margin-top:48px;">
+  仅原型，不代表最终像素。任何位置、字号、间距都可调。<br>
+  iPhone 实机会启用 SF Pro / 苹方系统字体，渲染更精致。
+</p>
+
+</body>
+</html>

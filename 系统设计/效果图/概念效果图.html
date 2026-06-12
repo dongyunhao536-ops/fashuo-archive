@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>法硕定制 APP · 概念效果图（背诵 + 答疑）</title>
+<style>
+  :root{
+    --ink:#1c2230; --sub:#6b7280; --line:#e6e9ef; --bg:#eef1f5;
+    --recite:#4f46e5; --recite-soft:#eef0ff;
+    --ask:#0d9488; --ask-soft:#e6f7f4;
+    --warn:#dc2626; --warn-soft:#fdeceb; --amber:#b45309; --amber-soft:#fdf3e3;
+    --star:#d97706;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1500px;margin:0 auto;padding:28px 20px 60px}
+  header.top{text-align:center;margin-bottom:6px}
+  header.top h1{font-size:22px;letter-spacing:.5px}
+  header.top p{color:var(--sub);font-size:13px;margin-top:6px}
+  .legend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:14px 0 26px;font-size:12px;color:var(--sub)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .phones{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;align-items:flex-start}
+  .col{width:340px;max-width:92vw}
+  .col > .cap{font-size:13px;color:var(--sub);text-align:center;margin-bottom:10px}
+  .col > .cap b{color:var(--ink)}
+  /* phone frame */
+  .phone{background:#0b0e14;border-radius:42px;padding:11px;box-shadow:0 18px 40px rgba(20,25,40,.18)}
+  .screen{background:#fff;border-radius:32px;overflow:hidden;height:720px;display:flex;flex-direction:column;position:relative}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:24px;background:#0b0e14;border-radius:0 0 16px 16px;z-index:5}
+  .statusbar{display:flex;justify-content:space-between;align-items:center;padding:11px 20px 4px;font-size:12px;color:#9aa1ad;font-weight:600}
+  .appbar{padding:6px 18px 12px;border-bottom:1px solid var(--line)}
+  .appbar .ttl{font-size:17px;font-weight:700}
+  .appbar .meta{font-size:12px;color:var(--sub);margin-top:2px}
+  .body{flex:1;overflow-y:auto;padding:14px 16px 24px}
+  .body::-webkit-scrollbar{width:0}
+  .tabbar{display:flex;border-top:1px solid var(--line);background:#fafbfc}
+  .tabbar .t{flex:1;text-align:center;padding:9px 0 11px;font-size:11px;color:#9aa1ad}
+  .tabbar .t .ic{font-size:18px;display:block;line-height:1.4}
+  .tabbar .t.on{color:var(--recite);font-weight:700}
+  .tabbar.ask .t.on{color:var(--ask)}
+
+  /* progress */
+  .prog{height:8px;background:#eef0f4;border-radius:6px;overflow:hidden;margin:4px 0 2px}
+  .prog > i{display:block;height:100%;border-radius:6px;background:var(--recite)}
+  /* section head */
+  .sec{display:flex;align-items:center;gap:8px;margin:16px 2px 8px;font-size:13px;font-weight:700}
+  .sec .n{color:var(--sub);font-weight:600}
+  .sec.A{color:var(--recite)} .sec.B{color:#0369a1} .sec.C{color:#9333ea}
+  /* recite item */
+  .kp{border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:10px;background:#fff}
+  .kp .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .kp .name{font-size:14px;font-weight:600;line-height:1.4}
+  .kp .subj{font-size:11px;color:var(--sub);white-space:nowrap;background:#f3f4f8;padding:2px 7px;border-radius:8px}
+  .tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+  .tag{font-size:11px;padding:1px 7px;border-radius:7px;font-weight:600}
+  .tag.due{background:var(--recite-soft);color:var(--recite)}
+  .tag.weak{background:var(--warn-soft);color:var(--warn)}
+  .tag.star{background:var(--amber-soft);color:var(--star)}
+  .tag.new{background:#e7f6ec;color:#15803d}
+  .kp .chev{color:#c2c7d0;font-size:12px;margin-top:2px}
+  /* expanded */
+  .kp.open{border-color:#c7c9f5;box-shadow:0 4px 14px rgba(79,70,229,.08)}
+  .detail{margin-top:10px;border-top:1px dashed var(--line);padding-top:9px;font-size:12.5px;color:#374151}
+  .detail .ln{display:flex;gap:7px;margin-bottom:6px}
+  .detail .k{color:var(--sub);white-space:nowrap;min-width:54px}
+  .detail .point{background:#f8f9fc;border-left:3px solid var(--recite);border-radius:0 8px 8px 0;padding:8px 10px;margin:8px 0}
+  .detail .point b{color:var(--warn)}
+  .detail .test{background:var(--recite-soft);border-radius:8px;padding:8px 10px;color:#3730a3;font-weight:500}
+  .btn{display:block;width:100%;text-align:center;border:none;border-radius:12px;padding:11px;font-size:14px;font-weight:700;margin-top:6px;cursor:default}
+  .btn.primary{background:var(--recite);color:#fff}
+  .btn.ghost{background:#fff;border:1px solid var(--line);color:var(--sub);font-weight:600}
+  .mix{border:1px solid #ecd9fb;background:#faf5ff;border-radius:14px;padding:11px 12px;margin-bottom:10px}
+  .mix .name{font-size:14px;font-weight:700;color:#7e22ce}
+  .mix .lk{font-size:11px;color:var(--sub);margin-top:5px}
+  .mix .q{font-size:12.5px;color:#374151;margin-top:7px;background:#fff;border-radius:8px;padding:8px 10px}
+  .foot{margin-top:14px;font-size:12px;color:var(--sub);text-align:center;background:#f7f8fa;border-radius:12px;padding:10px}
+
+  /* detection screen */
+  .dcard{border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:12px}
+  .dlabel{font-size:11px;font-weight:700;color:var(--recite);background:var(--recite-soft);display:inline-block;padding:2px 9px;border-radius:8px}
+  .dq{font-size:15px;font-weight:600;margin:10px 0 4px;line-height:1.5}
+  .ans-area{border:1px dashed #cfd3db;border-radius:12px;padding:11px;color:#9aa1ad;font-size:13px;min-height:62px}
+  .grade{border:1px solid #cfe9df;background:var(--ask-soft);border-radius:14px;padding:12px}
+  .grade .top{display:flex;align-items:center;justify-content:space-between}
+  .grade .badge{font-size:12px;font-weight:800;color:#fff;background:var(--ask);padding:3px 10px;border-radius:9px}
+  .evi{background:#fff;border-radius:10px;padding:9px 10px;margin-top:9px;font-size:12px;color:#374151}
+  .evi .h{font-size:11px;color:var(--sub);font-weight:700;margin-bottom:4px;letter-spacing:.3px}
+  .evi code{background:#f1f5f9;border-radius:5px;padding:1px 5px;font-size:11px;color:#0f766e}
+  .uparrow{color:#15803d;font-weight:700;font-size:12px;margin-top:8px;display:flex;align-items:center;gap:5px}
+
+  /* chat (ask) */
+  .modepill{display:flex;gap:6px;margin-bottom:12px}
+  .modepill .m{flex:1;text-align:center;font-size:11px;padding:6px;border-radius:9px;border:1px solid var(--line);color:var(--sub)}
+  .modepill .m.on{background:var(--ask-soft);border-color:#9fded3;color:var(--ask);font-weight:700}
+  .msg{display:flex;margin-bottom:12px}
+  .msg.u{justify-content:flex-end}
+  .bub{max-width:84%;padding:9px 12px;border-radius:15px;font-size:13px;line-height:1.5}
+  .msg.u .bub{background:var(--ask);color:#fff;border-bottom-right-radius:5px}
+  .msg.a .bub{background:#f1f3f7;color:var(--ink);border-bottom-left-radius:5px}
+  .step{font-size:10.5px;color:var(--ask);font-weight:700;margin:0 0 3px 4px;letter-spacing:.3px}
+  .msg.a .bub b{color:var(--ask)}
+  .sig{background:#fff7d6;border-radius:4px;padding:0 3px;color:#92660a;font-weight:600}
+  .evicard{border:1px solid #cfe9df;background:var(--ask-soft);border-radius:13px;padding:11px;margin:2px 0 12px}
+  .evicard .h{font-size:11px;font-weight:800;color:var(--ask);margin-bottom:6px}
+  .evicard .li{font-size:12px;color:#374151;margin-bottom:4px;display:flex;gap:6px}
+  .evicard .li i{color:var(--ask);font-style:normal}
+  .composer{border-top:1px solid var(--line);padding:9px 12px;display:flex;gap:8px;align-items:center;background:#fff}
+  .composer .ip{flex:1;background:#f1f3f7;border-radius:18px;padding:9px 14px;color:#9aa1ad;font-size:13px}
+  .composer .snd{width:34px;height:34px;border-radius:50%;background:var(--ask);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .composer .cam{width:34px;height:34px;border-radius:50%;background:#e6f7f4;color:var(--ask);display:flex;align-items:center;justify-content:center;font-size:16px}
+  .escape{position:absolute;top:60px;right:14px;z-index:6;background:#fff;border:1px solid #f0c9c9;color:var(--warn);font-size:11px;font-weight:700;padding:5px 11px;border-radius:20px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .noteflag{font-size:11px;color:var(--sub);background:#f7f8fa;border-radius:8px;padding:7px 9px;margin-bottom:10px;border-left:3px solid var(--ask)}
+  .disclaim{text-align:center;color:#9aa1ad;font-size:12px;margin-top:34px;line-height:1.7}
+
+  /* ===== dashboard（仪表盘首页） ===== */
+  .tabbar.dash .t.on{color:#334155}
+  .hero{background:linear-gradient(135deg,#1c2230,#323b4f);border-radius:18px;padding:15px 16px 14px;color:#fff;margin-bottom:13px}
+  .hero .dday{font-size:12px;color:#cbd5e1}
+  .hero .dday b{font-size:30px;color:#fff;font-weight:800;letter-spacing:.5px;vertical-align:-2px}
+  .hero .hprog{height:6px;background:rgba(255,255,255,.16);border-radius:6px;overflow:hidden;margin:11px 0 7px}
+  .hero .hprog>i{display:block;height:100%;border-radius:6px;background:#a5b4fc;width:0%}
+  .hero .hsub{font-size:11px;color:#94a3b8;display:flex;justify-content:space-between}
+  .card{border:1px solid var(--line);border-radius:16px;padding:13px 14px;margin-bottom:12px;background:#fff}
+  .card .ch{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;margin-bottom:10px}
+  .card .ch .more{font-size:11px;color:var(--sub);font-weight:600}
+  .dualcta{display:flex;gap:10px;margin-bottom:12px}
+  .dualcta a{flex:1;border-radius:15px;padding:13px 12px;text-decoration:none;display:block}
+  .dualcta .r{background:var(--recite-soft);border:1px solid #d8daf8}
+  .dualcta .k{background:var(--ask-soft);border:1px solid #b9e2da}
+  .dualcta .lab{font-size:12px;font-weight:700;color:#1c2230}
+  .dualcta .r .lab{color:var(--recite)} .dualcta .k .lab{color:var(--ask)}
+  .dualcta .big{font-size:22px;font-weight:800;margin-top:4px;color:#1c2230}
+  .dualcta .tip{font-size:10.5px;color:var(--sub);margin-top:3px}
+  .radarval{display:flex;justify-content:space-between;font-size:11px;color:#6b7280;margin-top:6px;flex-wrap:wrap;gap:4px}
+  .radarval span b{color:var(--recite)}
+  .wk{display:flex;gap:6px;justify-content:space-between}
+  .wk .d{flex:1;text-align:center}
+  .wk .cell{height:34px;border-radius:7px;background:#eef0f4;display:flex;align-items:flex-end;justify-content:center;font-size:9px;color:#9aa1ad;padding-bottom:2px;position:relative}
+  .wk .cell.today{outline:2px solid var(--recite);outline-offset:1px}
+  .wk .lab{font-size:10px;color:var(--sub);margin-top:4px}
+  .wlist .wrow{display:flex;align-items:center;gap:9px;padding:7px 0;border-top:1px dashed var(--line)}
+  .wlist .wrow:first-child{border-top:none}
+  .wlist .rk{width:18px;height:18px;border-radius:6px;background:var(--warn-soft);color:var(--warn);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .wlist .wn{font-size:12.5px;color:#374151;flex:1;line-height:1.4}
+  .wlist .wf{font-size:10.5px;color:var(--warn);font-weight:700;background:var(--warn-soft);padding:1px 7px;border-radius:7px;white-space:nowrap}
+  .inbox{display:flex;align-items:center;gap:12px;border:1px solid #fde7c8;background:#fffaf0;border-radius:16px;padding:12px 14px;margin-bottom:12px}
+  .inbox .cnt{width:40px;height:40px;border-radius:12px;background:var(--amber-soft);color:var(--amber);font-size:19px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .inbox .it{flex:1}
+  .inbox .it .t1{font-size:13px;font-weight:700;color:#1c2230}
+  .inbox .it .t2{font-size:11px;color:var(--sub);margin-top:2px}
+  .inbox .go{font-size:18px;color:var(--amber)}
+  .acc{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+  .acc .ah{display:flex;justify-content:space-between;align-items:center;padding:11px 13px;font-size:12.5px;font-weight:600;color:#374151}
+  .acc .ah .badge2{font-size:10px;background:#eef0f4;color:#6b7280;padding:1px 7px;border-radius:7px;font-weight:700}
+
+  /* ===== coach（教练规划 tab） ===== */
+  .tabbar.coach .t.on{color:#b45309}
+  .cstep{font-size:10.5px;color:#b45309;font-weight:700;margin:0 0 3px 4px;letter-spacing:.3px}
+  .phase{display:flex;gap:7px;align-items:center;background:var(--amber-soft);border:1px solid #f0d9a8;border-radius:11px;padding:8px 11px;margin-bottom:13px;font-size:11.5px;color:#92660a}
+  .phase b{color:#b45309}
+  .parsechip{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid #f0d9a8;border-radius:20px;padding:5px 12px;font-size:11.5px;color:#92660a;margin-bottom:13px}
+  .parsechip b{color:#b45309} .parsechip .ok{color:#15803d;font-weight:700}
+  .pcard{border:1px solid var(--line);border-radius:13px;padding:11px 12px;margin:2px 0 13px;background:#fff}
+  .pcard .pt{font-size:12px;font-weight:700;color:#374151;display:flex;justify-content:space-between;align-items:center}
+  .pcard .ontrack{font-size:10.5px;color:#15803d;font-weight:700;background:#e7f6ec;padding:1px 8px;border-radius:7px}
+  .pbar{height:7px;background:#eef0f4;border-radius:6px;overflow:hidden;margin:9px 0 5px}
+  .pbar>i{display:block;height:100%;border-radius:6px;background:#d9883a}
+  .recobox{border:1px solid #f0d9a8;background:#fffaf0;border-radius:13px;padding:11px 12px;margin:2px 0 13px}
+  .recobox .rh{font-size:11px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .recobox .rl{font-size:12.5px;color:#374151;line-height:1.5;display:flex;gap:7px;margin-bottom:4px}
+  .recobox .rl i{color:#b45309;font-style:normal}
+  .recobtns{display:flex;gap:7px;margin-top:10px}
+  .recobtns .rb{flex:1;text-align:center;font-size:11px;font-weight:700;padding:8px;border-radius:9px}
+  .recobtns .rb.pri{background:#b45309;color:#fff}
+  .recobtns .rb.sec{background:#fff;border:1px solid #f0d9a8;color:#b45309}
+  .recobtns .rb.gh{background:#fff;border:1px solid var(--line);color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>法硕定制 APP · 概念效果图</h1>
+    <p>仪表盘 + 教练规划 + 两个核心模块 · 仅示意布局与交互流，非最终视觉 · 2026-06-06</p>
+  </header>
+  <div class="legend">
+    <span><i class="dot" style="background:#4f46e5"></i>背诵系统</span>
+    <span><i class="dot" style="background:#0d9488"></i>答疑系统</span>
+    <span><i class="dot" style="background:#dc2626"></i>弱项标记</span>
+    <span><i class="dot" style="background:#d97706"></i>⭐高频</span>
+  </div>
+
+  <div class="phones">
+
+    <!-- ============ 0. 仪表盘·首页综合大屏 ============ -->
+    <div class="col">
+      <div class="cap"><b>仪表盘 ⓪</b> · 首页综合大屏（入口·非核心·干净简洁）</div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>7:40</span><span>📶 🔋</span></div>
+        <div class="appbar">
+          <div class="ttl">📊 云的备考台</div>
+          <div class="meta">2026 法硕（非法学）· 北大 375+</div>
+        </div>
+        <div class="body">
+
+          <!-- Hero：倒计时 + 今日 -->
+          <div class="hero">
+            <div class="dday">距初试还有 <b>199</b> 天 · 12 月 21 日</div>
+            <div class="hprog"><i style="width:0%"></i></div>
+            <div class="hsub"><span>今日已学 0 分钟</span><span>今日任务 0 / 9 · 本周 4/6 天达标</span></div>
+          </div>
+
+          <!-- 双核入口 -->
+          <div class="dualcta">
+            <a class="r">
+              <div class="lab">📖 今日背诵</div>
+              <div class="big">0 / 9</div>
+              <div class="tip">6 到期 · 1 新 · 2 易混 · ~35 分</div>
+            </a>
+            <a class="k">
+              <div class="lab">💬 答疑</div>
+              <div class="big">3 卡点</div>
+              <div class="tip">上次卡在「无权处分」未收口</div>
+            </a>
+          </div>
+
+          <!-- 能力雷达（五科） -->
+          <div class="card">
+            <div class="ch"><span>🕸️ 能力雷达 · 五科</span><span class="more">看详情 ›</span></div>
+            <svg viewBox="0 0 260 200" width="100%" style="display:block">
+              <polygon points="130,25 206.09,80.28 177.02,169.72 82.98,169.72 53.91,80.28" fill="#f8f9fc" stroke="#e6e9ef"/>
+              <polygon points="130,45 187.07,86.46 165.27,153.54 94.73,153.54 72.93,86.46" fill="none" stroke="#eceef4"/>
+              <polygon points="130,65 168.05,92.64 153.51,137.36 106.49,137.36 91.95,92.64" fill="none" stroke="#eceef4"/>
+              <polygon points="130,85 149.02,98.82 141.76,121.18 118.24,121.18 110.98,98.82" fill="none" stroke="#eceef4"/>
+              <g stroke="#e6e9ef">
+                <line x1="130" y1="105" x2="130" y2="25"/>
+                <line x1="130" y1="105" x2="206.09" y2="80.28"/>
+                <line x1="130" y1="105" x2="177.02" y2="169.72"/>
+                <line x1="130" y1="105" x2="82.98" y2="169.72"/>
+                <line x1="130" y1="105" x2="53.91" y2="80.28"/>
+              </g>
+              <polygon points="130,61 168.05,92.64 162.91,150.30 100.85,145.13 75.21,87.20"
+                       fill="rgba(79,70,229,.16)" stroke="#4f46e5" stroke-width="2"/>
+              <g fill="#4f46e5">
+                <circle cx="130" cy="61" r="3"/><circle cx="168.05" cy="92.64" r="3"/>
+                <circle cx="162.91" cy="150.30" r="3"/><circle cx="100.85" cy="145.13" r="3"/>
+                <circle cx="75.21" cy="87.20" r="3"/>
+              </g>
+              <g font-size="11" fill="#6b7280" font-weight="600">
+                <text x="130" y="18" text-anchor="middle">刑法</text>
+                <text x="214" y="83" text-anchor="start">民法</text>
+                <text x="180" y="187" text-anchor="middle">法理</text>
+                <text x="78" y="187" text-anchor="middle">宪法</text>
+                <text x="46" y="83" text-anchor="end">法制史</text>
+              </g>
+            </svg>
+            <div class="radarval">
+              <span>刑 <b>55%</b></span><span>民 <b>50%</b></span><span>法理 <b>70%</b></span>
+              <span>宪 <b>62%</b></span><span>法制史 <b>72%</b></span>
+            </div>
+            <div style="font-size:10.5px;color:#9aa1ad;margin-top:6px;text-align:center">
+              ⚠️ 示意值 · 由背诵 L1-L3 检测结果按父考点聚合喂入；云真实学情从 0 记录
+            </div>
+          </div>
+
+          <!-- 待办筐（待消化错题/沉淀确认） -->
+          <div class="inbox">
+            <div class="cnt">3</div>
+            <div class="it">
+              <div class="t1">待确认沉淀</div>
+              <div class="t2">2 候选弱项 · 1 候选「已强化」（答疑沉淀，待你拍板）</div>
+            </div>
+            <div class="go">›</div>
+          </div>
+
+          <!-- Top5 弱项 -->
+          <div class="card">
+            <div class="ch"><span>⚠️ Top 5 弱项</span><span class="more">去弱项页 ›</span></div>
+            <div class="wlist">
+              <div class="wrow"><span class="rk">1</span><span class="wn">担保物权优先顺位（416 条 vs 质权）</span><span class="wf">×3</span></div>
+              <div class="wrow"><span class="rk">2</span><span class="wn">破坏交通设施 vs 危害公共安全罪区分</span><span class="wf">×2</span></div>
+              <div class="wrow"><span class="rk">3</span><span class="wn">解约定金：约定即生效，无需实付</span><span class="wf">×2</span></div>
+              <div class="wrow"><span class="rk">4</span><span class="wn">债务转移后担保人免责范围</span><span class="wf">×1</span></div>
+              <div class="wrow"><span class="rk">5</span><span class="wn">试用买卖：处分即视为购买</span><span class="wf">×1</span></div>
+            </div>
+          </div>
+
+          <!-- 本周复习热力 -->
+          <div class="card">
+            <div class="ch"><span>🗓️ 本周复习密度</span><span class="more">4/6 达标</span></div>
+            <div class="wk">
+              <div class="d"><div class="cell" style="background:#c7cbf5">9</div><div class="lab">一</div></div>
+              <div class="d"><div class="cell" style="background:#dfe1fb">6</div><div class="lab">二</div></div>
+              <div class="d"><div class="cell" style="background:#a5b4fc">12</div><div class="lab">三</div></div>
+              <div class="d"><div class="cell" style="background:#eef0f4">0</div><div class="lab">四</div></div>
+              <div class="d"><div class="cell" style="background:#c7cbf5">9</div><div class="lab">五</div></div>
+              <div class="d"><div class="cell today" style="background:#eef0f4">9</div><div class="lab">今</div></div>
+              <div class="d"><div class="cell" style="background:#f4f5f8">—</div><div class="lab">日</div></div>
+            </div>
+          </div>
+
+          <!-- 次要：折叠的更新提醒 -->
+          <div class="dsec">动态 · 默认折叠</div>
+          <div class="acc">
+            <div class="ah"><span>📝 心得最近更新</span><span class="badge2">近 7 天 · 2 条 ▾</span></div>
+          </div>
+          <div class="acc">
+            <div class="ah"><span>⚖️ 法律更新提醒</span><span class="badge2">关联当前章节 · 1 条 ▾</span></div>
+          </div>
+
+        </div>
+        <div class="tabbar dash">
+          <div class="t"><span class="ic">📖</span>背诵</div>
+          <div class="t"><span class="ic">💬</span>答疑</div>
+          <div class="t"><span class="ic">📋</span>教练</div>
+          <div class="t on"><span class="ic">📊</span>仪表盘</div>
+          <div class="t"><span class="ic">⚠️</span>弱项</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ============ 0.5 教练·复习规划（四段输出·推荐+拍板） ============ -->
+    <div class="col">
+      <div class="cap"><b>教练 ⓪·5</b> · 复习规划（你丢一句 → 四段·推荐+拍板）</div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>22:10</span><span>📶 🔋</span></div>
+        <div class="appbar">
+          <div class="ttl">📋 教练 · 复习规划</div>
+          <div class="meta">只管法硕5科 ｜ 距考 199 天 ｜ 第2轮·框架记忆窗口</div>
+        </div>
+        <div class="body">
+
+          <div class="phase">🧭 当前阶段：<b>知识体系铺开期</b>（剩6月）· 9月起切「高频+弱项优先」· 节奏模板：在职双轨</div>
+
+          <!-- 云输入 -->
+          <div class="msg u"><div class="bub" style="background:#b45309">今天刑法第5章，听课</div></div>
+
+          <!-- 解析回显确认 -->
+          <div class="parsechip">已识别：<b>刑法 · 第5章 · 听课</b> <span class="ok">✓ 对</span> · <span style="text-decoration:underline">✎ 改</span></div>
+
+          <!-- ① 即时点拨 -->
+          <div class="msg a"><div>
+            <div class="cstep">① 即时点拨 · 经验帖 Rule1（刑民理解为本）</div>
+            <div class="bub" style="background:#fdf3e3;color:#5c3d0a">刑法<b>听完别急着背</b>——先做本章配套题验证你真听懂了。做题暴露的点直接丢答疑，别留着糊过去。<span style="color:#9aa1ad">（直接背=你三次失败的老路）</span></div>
+          </div></div>
+
+          <!-- ② 进度归位 -->
+          <div class="pcard">
+            <div class="pt"><span>② 进度归位 · 刑法一轮听课</span><span class="ontrack">在轨 ✅</span></div>
+            <div class="pbar"><i style="width:23%"></i></div>
+            <div style="font-size:11.5px;color:#6b7280">5 / 22 章 · 当前在「第2轮·框架记忆」窗口（Rule4）· 距 9月底基础结业红线还有 116 天</div>
+          </div>
+
+          <!-- ③ 下一步规划（推荐+拍板） -->
+          <div class="recobox">
+            <div class="rh">③ 下一步规划 · 推荐（你可改）</div>
+            <div class="rl"><i>明早</i><span>通勤听刑法第6章音频（碎片时段·Rule3）</span></div>
+            <div class="rl"><i>今晚</i><span>剩 2h 大块 → 攻你的弱项「担保物权优先顺位 ×3」</span></div>
+            <div class="rl"><i>周末</i><span>2021 刑法真题精做一套 + 标错</span></div>
+            <div class="recobtns">
+              <div class="rb pri">✓ 采纳</div>
+              <div class="rb sec">✎ 改一改</div>
+              <div class="rb gh">今天不按</div>
+            </div>
+          </div>
+
+          <!-- ④ 复盘提取 -->
+          <div class="msg a"><div>
+            <div class="cstep">④ 复盘 · 经验帖 Rule6（每日3行）</div>
+            <div class="bub" style="background:#f1f3f7">睡前花 1 分钟：今天这章<b>最不懂的一点</b>是啥？最有把握的呢？</div>
+          </div></div>
+          <div class="noteflag" style="border-color:#b45309">💡 你说"第5章故意伤害的转化没绕明白" → 已生成<b>候选弱项</b>，收进档案吗？ <b style="color:#b45309">[✓ 收下]</b> &nbsp; [✗ 忽略] <span style="color:#9aa1ad">（走待办筐，PC 登记进当前弱项.md）</span></div>
+
+          <div class="foot" style="text-align:left;line-height:1.7">
+            🤝 <b>推荐 + 你拍板</b>：框架由系统按经验帖兜底（保科学），<br>
+            但<b>判断采纳哪条、复盘哪点，留给你自己做</b>——这步就是在练你说的「主动思考」。<br>
+            <span style="color:#9aa1ad">系统不替你排死计划（那样既脱离当天状态、也练不到脑子）。</span>
+          </div>
+        </div>
+        <div class="composer">
+          <div class="ip">说说今天学了哪科·哪章·听课还是做题…</div>
+          <div class="snd" style="background:#b45309">↑</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ============ 1. 背诵·每日清单 ============ -->
+    <div class="col">
+      <div class="cap"><b>背诵 ①</b> · 每日清单（三段式·默认折叠）</div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:24</span><span>📶 🔋</span></div>
+        <div class="appbar">
+          <div class="ttl">📅 今日背诵 · 刑民</div>
+          <div class="meta">6 月 6 日 ｜ 9 个考点 ｜ 预计 ~35 分钟</div>
+          <div class="prog"><i style="width:0%"></i></div>
+          <div class="meta" style="margin-top:5px">已完成 0 / 9 · 距考试 199 天</div>
+        </div>
+        <div class="body">
+
+          <div class="sec A">【A 到期复习】<span class="n">6</span></div>
+
+          <!-- expanded item -->
+          <div class="kp open">
+            <div class="row1">
+              <div class="name">价款超级优先权(416条)的优先顺位</div>
+              <div class="subj">民法·担保物权</div>
+            </div>
+            <div class="tags">
+              <span class="tag due">到期·7天档</span>
+              <span class="tag weak">弱项 ×1</span>
+              <span class="tag star">⭐高频</span>
+            </div>
+            <div class="detail">
+              <div class="ln"><span class="k">档位进度</span><span>封顶 L3 ｜ L1✓ · L2 到期 · L3 未测 ｜ 难度 D7</span></div>
+              <div class="ln"><span class="k">锚点</span><span>民法典 416 条 ｜ 关联 卷三题50 · 易混-担保物权优先顺位</span></div>
+              <div class="point">416 条价款债权不仅优先于抵押权人，<b>对质权也优先</b>。
+                〔你上次漏了对质权的优先〕</div>
+              <div class="test">✍️ 今日检测 L2：「为什么价款优先权能压过先设立的质权？」</div>
+              <button class="btn primary">开始检测 →</button>
+            </div>
+          </div>
+
+          <!-- folded items -->
+          <div class="kp">
+            <div class="row1">
+              <div class="name">转化型抢劫「携带凶器」的反差陷阱</div>
+              <div class="chev">▾</div>
+            </div>
+            <div class="tags"><span class="tag due">到期·15天档</span><span class="tag" style="background:#eef0f4;color:#6b7280">心得#5</span></div>
+          </div>
+          <div class="kp">
+            <div class="row1">
+              <div class="name">解约定金：约定即生效，无需实际支付</div>
+              <div class="chev">▾</div>
+            </div>
+            <div class="tags"><span class="tag due">到期·3天档</span><span class="tag weak">弱项 ×1</span></div>
+          </div>
+          <div class="kp">
+            <div class="row1">
+              <div class="name">妨害信用卡管理罪不能由单位构成</div>
+              <div class="chev">▾</div>
+            </div>
+            <div class="tags"><span class="tag due">L1 到期</span><span class="tag weak">弱项 ×1</span></div>
+          </div>
+
+          <div class="sec B">【B 新考点】<span class="n">1（配速器额度）</span></div>
+          <div style="background:#f0f9ff;border:1px solid #cfe7f7;border-radius:11px;padding:9px 11px;margin-bottom:10px;font-size:12px;color:#0369a1">
+            🤖 按「剩余考点 ÷ 剩余天数」，今天推荐学 <b>1 个</b>新考点（保进度不崩）。
+            <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+              <span style="color:#374151">你可改：</span>
+              <span style="border:1px solid #cfe7f7;border-radius:8px;padding:1px 11px;background:#fff;font-weight:800">－</span>
+              <span style="font-weight:800;font-size:14px">1</span>
+              <span style="border:1px solid #cfe7f7;border-radius:8px;padding:1px 11px;background:#fff;font-weight:800">＋</span>
+              <span style="margin-left:auto;color:#6b7280;text-decoration:underline">今天只复习，不学新</span>
+            </div>
+          </div>
+          <div class="kp">
+            <div class="row1">
+              <div class="name">试用买卖：试用人处分＝视为购买</div>
+              <div class="chev">▾</div>
+            </div>
+            <div class="tags"><span class="tag new">新考点</span><span class="tag star">⭐高频</span></div>
+          </div>
+
+          <div class="sec C">【C 易混对决】<span class="n">2 对</span></div>
+          <div class="mix">
+            <div class="name">⚔️ 高空抛物罪 vs 过失致死 vs 过失危害公共安全</div>
+            <div class="lk">易混库 · 心得刑法#20 · 卷一案例57</div>
+            <div class="q">给一个高空抛物场景，问「这是哪个罪？凭什么不是另外两个？」</div>
+          </div>
+          <div class="mix">
+            <div class="name">⚔️ 宣告失踪 vs 宣告死亡（利害关系人顺位）</div>
+            <div class="lk">易混库 · 卷一题24 · 卷二题23</div>
+          </div>
+
+          <div class="foot">⏱ 只有 20 分钟？点这里 → 系统按「先砍推进、死保维护+治混淆」自动截断
+            <button class="btn ghost" style="margin-top:8px">时间不够，帮我压缩今天</button>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="t on"><span class="ic">📖</span>背诵</div>
+          <div class="t"><span class="ic">💬</span>答疑</div>
+          <div class="t"><span class="ic">📋</span>教练</div>
+          <div class="t"><span class="ic">📊</span>仪表盘</div>
+          <div class="t"><span class="ic">⚠️</span>弱项</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ============ 1.5 背诵·考点完整原文 ============ -->
+    <div class="col">
+      <div class="cap"><b>背诵 ①·5</b> · 点开考点 → 完整原文（编码阶段）</div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:26</span><span>📶 🔋</span></div>
+        <div class="appbar">
+          <div class="ttl">价款超级优先权 (416条)</div>
+          <div class="meta">民法·担保物权 ｜ 先读原文，再做检测</div>
+        </div>
+        <div class="body">
+          <div class="dcard">
+            <span class="dlabel" style="background:#eef0ff;color:var(--recite)">📄 背诵原文 · 考试分析</span>
+            <div style="font-size:11px;color:var(--sub);margin:9px 0 6px">来源：ANKI 卡组导入 · 民法典 416 条 &nbsp;<i>（下为示意文本，正式版用考试分析原文）</i></div>
+            <div style="font-size:13.5px;line-height:1.75;color:#1f2937">
+              出卖人对标的物享有价款债权，并在标的物上设立抵押的，该<b>价款抵押权</b>于标的物交付后十日内办理登记的，<b>优先于</b>买受人的其他债权人就该标的物受偿——包括先设立的抵押权人，以及<b>质权人</b>。<br><br>
+              <span style="color:var(--sub)">法理：价款是「这个物得以进入交易、成为担保物」的源头——没有这笔钱就没有这个物，故法律赋予它超级优先地位。</span>
+            </div>
+            <div class="point" style="border-color:var(--warn)">⚠️ 你的旧坑：上次只想到压抵押权，<b>漏了对质权也优先</b>（卷三题50）。</div>
+          </div>
+          <button class="btn primary">📖 读完了，开始检测 →</button>
+          <div class="foot" style="margin-top:12px;text-align:left;line-height:1.7">
+            🚫 没有「简单 / 一般 / 困难」自评按钮。<br>
+            <b>读完 → 做一道检测题</b>，由 AI 客观判你「到底背没背出来」，<br>用<b>真实结果</b>决定升档 / 退档——而非你的自我感觉。<br>
+            <span style="color:#9aa1ad">（赶时间也可「只看不测」，但只有测过才更新记忆档期）</span>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="t on"><span class="ic">📖</span>背诵</div>
+          <div class="t"><span class="ic">💬</span>答疑</div>
+          <div class="t"><span class="ic">📋</span>教练</div>
+          <div class="t"><span class="ic">📊</span>仪表盘</div>
+          <div class="t"><span class="ic">⚠️</span>弱项</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ============ 2A 背诵·L1 秒判 ============ -->
+    <div class="col">
+      <div class="cap"><b>背诵 ②·A</b> · L1 秒判（大头·点选不打字）</div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:33</span><span>📶 🔋</span></div>
+        <div class="appbar">
+          <div class="ttl">✍️ 检测 · L1 记忆</div>
+          <div class="meta">妨害信用卡管理罪 ｜ 第 4 / 9 ｜ 点选即判，无需打字</div>
+        </div>
+        <div class="body">
+          <div class="dcard">
+            <span class="dlabel">L1 记忆 · 判断题</span>
+            <div class="dq">妨害信用卡管理罪，<u>能否</u>由单位构成？</div>
+            <div style="display:flex;gap:10px;margin-top:14px">
+              <div style="flex:1;text-align:center;padding:15px;border:1px solid var(--line);border-radius:12px;font-weight:700;color:var(--sub)">能</div>
+              <div style="flex:1;text-align:center;padding:15px;border:2px solid var(--ask);background:var(--ask-soft);border-radius:12px;font-weight:800;color:var(--ask)">不能 ✓</div>
+            </div>
+          </div>
+          <div class="grade" style="margin-top:4px">
+            <div class="top"><span style="font-weight:700;font-size:13px">秒判结果</span><span class="badge">正确 · 0.6s</span></div>
+            <div style="font-size:12.5px;color:#374151;margin-top:7px">177 条之一<b>无单位犯罪条款</b> → 不能由单位构成。</div>
+            <div class="uparrow">⬆ L1 通过 → 档期 7天→15天 ｜ 一下点完，没打一个字</div>
+          </div>
+          <div class="foot" style="margin-top:14px;text-align:left;line-height:1.7">
+            👈 这就是<b>大头 L1 的常态</b>：判断 / 单选 / 填一两个关键词，<br>
+            <b>点一下、规则秒判</b>——和点 ANKI 按钮一样快，<br>
+            但测的是「你真会」，不是「你感觉会」。<br>
+            <span style="color:#9aa1ad">要打字解释的只有少数 L2/L3（见右一屏），且按到期日分散。</span>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="t on"><span class="ic">📖</span>背诵</div>
+          <div class="t"><span class="ic">💬</span>答疑</div>
+          <div class="t"><span class="ic">📋</span>教练</div>
+          <div class="t"><span class="ic">📊</span>仪表盘</div>
+          <div class="t"><span class="ic">⚠️</span>弱项</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ============ 2B 背诵·检测 + 评分（L2 重测） ============ -->
+    <div class="col">
+      <div class="cap"><b>背诵 ②·B</b> · L2 重测（少数·要打字解释）</div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:31</span><span>📶 🔋</span></div>
+        <div class="appbar">
+          <div class="ttl">✍️ 检测 · L2 理解</div>
+          <div class="meta">价款超级优先权(416条) ｜ 第 1 / 9</div>
+        </div>
+        <div class="body">
+          <div class="dcard">
+            <span class="dlabel">L2 理解 · 解释题</span>
+            <div class="dq">为什么 416 条的价款优先权，能压过<u>先设立</u>的质权？请说出背后的法理。</div>
+            <div class="ans-area">✍️ 在这里作答（手写 / 键盘）…</div>
+            <button class="btn primary" style="margin-top:10px">提交作答</button>
+          </div>
+
+          <div class="cap" style="text-align:left;margin:4px 2px 8px">— 提交后 —</div>
+
+          <div class="grade">
+            <div class="top">
+              <span style="font-weight:700;font-size:13px">评分结果</span>
+              <span class="badge">干净通过 ✓</span>
+            </div>
+            <div style="font-size:12.5px;color:#374151;margin-top:7px">
+              你抓住了「价款债权是标的物得以进入交易、产生担保物的源头」这一核心，
+              法理方向正确。
+            </div>
+            <div class="evi">
+              <div class="h">📑 证据卡（已比对教材原文）</div>
+              <div>法条：民法典 <code>416 条</code>（价款抵押权 10 日内登记优先）</div>
+              <div style="margin-top:3px">grep 命中：<code>担保物权</code> · <code>价款</code> → 教材锚点已核</div>
+              <div style="margin-top:3px">关联：心得民法 · 卷三题50</div>
+            </div>
+            <div class="uparrow">⬆ L2 通过 → 升 L3 ｜ 难度 D7→D6 ｜ 下次档期 7天→15天</div>
+          </div>
+
+          <div class="foot" style="margin-top:14px">检测结果已回写：kp_state 升档 · 弱项「价款优先权」错频不变(本次答对，候选移出) · 雷达图刷新</div>
+        </div>
+        <div class="tabbar">
+          <div class="t on"><span class="ic">📖</span>背诵</div>
+          <div class="t"><span class="ic">💬</span>答疑</div>
+          <div class="t"><span class="ic">📋</span>教练</div>
+          <div class="t"><span class="ic">📊</span>仪表盘</div>
+          <div class="t"><span class="ic">⚠️</span>弱项</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ============ 3. 答疑·案例重引导（路B） ============ -->
+    <div class="col">
+      <div class="cap"><b>答疑 ①</b> · 案例题「重引导」（路 B · 不直接给答案）</div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>21:05</span><span>📶 🔋</span></div>
+        <div class="appbar">
+          <div class="ttl">💬 答疑</div>
+          <div class="meta">引导式 · 案例题已识别 → 重引导模式</div>
+        </div>
+        <div class="escape">直接讲 ⏭</div>
+        <div class="body">
+          <div class="noteflag">🧭 检测到这是案例题，进入<b>逐层拆解</b>模式。我不会直接报答案，先带你拆——卡住随时点右上「直接讲」。</div>
+
+          <div class="msg u"><div class="bub">📷 拍照导入 ·<br>甲将手表交乙保管，乙擅自卖给不知情的丙并交付。后甲找丙要表…（案例题）</div></div>
+
+          <div class="msg a"><div>
+            <div class="step">① 拆题 · 不给答</div>
+            <div class="bub">先别急着定结论。我们拆一下：这段里出现了<span class="sig">几个主体</span>？他们之间各是什么<span class="sig">法律关系</span>？你先数一数、说说看。</div>
+          </div></div>
+
+          <div class="msg u"><div class="bub">甲乙是保管，乙丙是买卖？甲想拿回表。</div></div>
+
+          <div class="msg a"><div>
+            <div class="step">② 抛引导问题</div>
+            <div class="bub">对，三个主体两段关系。那核心争点就来了：<b>丙能不能拿到表的所有权？</b> 这取决于哪个制度？提示一个信号词——丙是「<span class="sig">不知情</span>」的。</div>
+          </div></div>
+
+          <div class="msg u"><div class="bub">善意取得？但乙是无权处分啊，应该无效吧。</div></div>
+
+          <div class="msg a"><div>
+            <div class="step">③ 不判对错 · 反例反问</div>
+            <div class="bub">你说无权处分就无效——那我反问你：如果无权处分一律让买家拿不到东西，<b>善意取得这条制度还有什么存在意义</b>？它专门治的不就是「卖家无权、但买家不知情」这种局面吗？再想想，丙缺了哪个要件就不能取得？</div>
+          </div></div>
+
+          <div class="msg u"><div class="bub">哦……合理价格、已交付、善意。丙都满足，所以丙取得所有权，甲只能找乙赔。</div></div>
+
+          <div class="msg a"><div>
+            <div class="step">④ 收口 · 三段证据卡</div>
+            <div class="bub">这就推对了 👏 你自己走出来的，比我直接说牢得多。</div>
+          </div></div>
+
+          <div class="evicard">
+            <div class="h">📑 证据卡</div>
+            <div class="li"><i>结论</i><span>丙善意取得所有权；甲丧失原物返还请求权，转向乙主张赔偿。</span></div>
+            <div class="li"><i>法条</i><span>民法典 311 条（善意取得三要件）</span></div>
+            <div class="li"><i>教材</i><span>《考试分析》物权·善意取得（grep 已核「合理价格·已交付·善意」）</span></div>
+            <div class="li"><i>真题</i><span>关联 善意取得历年题 · 心得民法相对性条</span></div>
+          </div>
+
+          <div class="noteflag" style="border-color:var(--warn)">💡 本轮你卡在「无权处分＝无效」这一步 → 已生成<b>候选弱项</b>，要收进弱项档案吗？ <b style="color:var(--ask)">[✓ 收下]</b> &nbsp; [✗ 忽略]</div>
+        </div>
+        <div class="composer">
+          <div class="cam">📷</div>
+          <div class="ip">输入思路，或 📷 拍题…</div>
+          <div class="snd">↑</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ============ 4. 答疑·选择题轻引导（路B） ============ -->
+    <div class="col">
+      <div class="cap"><b>答疑 ②</b> · 选择题「轻引导」（路 B · 给提示不拉扯）</div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>21:22</span><span>📶 🔋</span></div>
+        <div class="appbar">
+          <div class="ttl">💬 答疑</div>
+          <div class="meta">引导式 · 选择题已识别 → 轻引导模式</div>
+        </div>
+        <div class="escape">直接讲 ⏭</div>
+        <div class="body">
+          <div class="modepill">
+            <div class="m">选择题 · 轻引导</div>
+            <div class="m on">当前：轻引导 ✓</div>
+            <div class="m">案例 · 重引导</div>
+          </div>
+          <div class="noteflag">🧭 选择题给你 <b>1–2 个提示问题</b>，最后<b>仍由你来选</b>——不来回拉扯，省时间。</div>
+
+          <div class="msg u"><div class="bub">下列关于妨害信用卡管理罪，正确的是？ A… B… C 单位可构成本罪 D…</div></div>
+
+          <div class="msg a"><div>
+            <div class="step">① 一个提示，不替你选</div>
+            <div class="bub">先只点你一下：刑法分则里，<b>一个罪能不能由「单位」构成，看什么</b>？——看该条文有没有<span class="sig">单位犯罪条款</span>。回去翻 177 条之一，看完你先自己排掉一个选项，告诉我你排哪个。</div>
+          </div></div>
+
+          <div class="msg u"><div class="bub">177条之一没有单位犯罪规定，所以 C 错，排除 C。</div></div>
+
+          <div class="msg a"><div>
+            <div class="step">② 收口 · 证据卡</div>
+            <div class="bub">完全正确，C 是错的、该排。你抓住了「无单位条款＝不能单位构成」这把钥匙。</div>
+          </div></div>
+
+          <div class="evicard">
+            <div class="h">📑 证据卡</div>
+            <div class="li"><i>考点</i><span>妨害信用卡管理罪无单位犯罪条款 → 不能由单位构成</span></div>
+            <div class="li"><i>法条</i><span>刑法 177 条之一</span></div>
+            <div class="li"><i>真题</i><span>关联 卷三题41（漏选）· 高频考点</span></div>
+          </div>
+
+          <div class="noteflag">本题你判断顺畅、无卡点 → <b>不生成弱项</b>。要不要把它存成一条「已强化」记录？ [✓] [✗]</div>
+        </div>
+        <div class="composer">
+          <div class="cam">📷</div>
+          <div class="ip">输入判断，或 📷 拍题…</div>
+          <div class="snd">↑</div>
+        </div>
+      </div></div>
+    </div>
+
+  </div><!-- /phones -->
+
+  <p class="disclaim">
+    ⚠️ 概念示意图 · 仅表达布局与交互逻辑，配色/字体/间距均非最终设计。<br>
+    例题数据取自现有设计档（部分为演练数据），仅用于展示形态，不代表真实学情。<br>
+    对应文档：仪表盘＝<b>00_方案讨论记录.md「仪表盘模块清单」</b> ｜ 教练＝<b>13_复习规划模块设计.md</b> ｜ 背诵＝<b>06_每日背诵清单形态.md</b> ｜ 答疑＝<b>00_方案讨论记录.md「答疑系统设计」</b>
+  </p>
+</div>
+</body>
+</html>

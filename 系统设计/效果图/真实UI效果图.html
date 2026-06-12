@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>法硕定制 APP · 真实 UI 效果图（已实现页面）</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { background:#0f1115; }
+  .phone { width:390px; flex:0 0 390px; border-radius:34px; background:#fff; box-shadow:0 18px 50px rgba(0,0,0,.4); overflow:hidden; border:8px solid #1c1f26; }
+  .screen { height:780px; overflow-y:auto; }
+  .screen::-webkit-scrollbar { width:0; }
+  .cap { color:#cbd5e1; font-size:13px; font-weight:700; margin:0 0 8px 4px; }
+  .cap b { color:#fff; }
+  .rail { display:flex; gap:34px; padding:34px; overflow-x:auto; align-items:flex-start; }
+</style>
+</head>
+<body>
+<div style="text-align:center;padding:26px 0 4px">
+  <h1 style="color:#fff;font-size:20px;font-weight:800;margin:0">法硕定制 APP · 真实 UI 效果图</h1>
+  <p style="color:#94a3b8;font-size:12.5px;margin:6px 0 0">已实现页面的静态快照（2026-06-09）· 数据为演练值 · 实际页面在 D:\fashuo-app 运行</p>
+</div>
+
+<div class="rail">
+
+  <!-- ===================== 0. 仪表盘 / ===================== -->
+  <div>
+    <div class="cap"><b>仪表盘</b> · /　（首页）</div>
+    <div class="phone"><div class="screen">
+      <main class="mx-auto flex max-w-md flex-col gap-3 bg-zinc-50 px-4 pb-24 pt-6">
+        <header class="flex items-baseline justify-between">
+          <h1 class="text-base font-semibold text-zinc-900">📊 云的备考台</h1>
+          <div class="text-[11px] text-zinc-500">2026 法硕 · 北大 375+</div>
+        </header>
+
+        <section class="rounded-2xl bg-gradient-to-br from-indigo-600 to-indigo-700 p-4 text-white shadow-sm">
+          <div class="text-sm">距初试还有 <b class="text-2xl">195</b> 天 · <span class="opacity-80">2026-12-21</span></div>
+          <div class="mt-2 flex justify-between text-[12px] opacity-90"><span>今日已学 35 分钟</span><span>今日检测 9 次</span></div>
+        </section>
+
+        <section class="grid grid-cols-2 gap-3">
+          <a class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="text-[11px] text-zinc-500">📖 今日背诵</div>
+            <div class="mt-1 text-xl font-bold text-zinc-900">6<span class="text-sm text-zinc-400"> / 9</span></div>
+            <div class="mt-1 text-[11px] text-zinc-500">1 复验 · 4 到期 · 4 新</div>
+          </a>
+          <a class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="text-[11px] text-zinc-500">💬 答疑</div>
+            <div class="mt-1 text-xl font-bold text-zinc-900">3<span class="text-sm text-zinc-400"> 卡点</span></div>
+            <div class="mt-1 line-clamp-1 text-[11px] text-zinc-500">上次卡在「债务转移担保人免责范围」</div>
+          </a>
+        </section>
+
+        <section class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+          <div class="flex items-center justify-between text-sm">
+            <span class="font-semibold text-zinc-900">🕸️ 能力雷达 · 五科</span>
+            <span class="text-[11px] text-zinc-500">按 mastered 聚合</span>
+          </div>
+          <svg viewBox="0 0 260 200" width="100%" class="mt-1 block">
+            <polygon points="130,25 206,80 177,170 83,170 54,80" fill="#f8f9fc" stroke="#e6e9ef"/>
+            <polygon points="130,45 187,86 165,154 95,154 73,86" fill="none" stroke="#eceef4"/>
+            <polygon points="130,65 168,93 154,137 106,137 92,93" fill="none" stroke="#eceef4"/>
+            <g stroke="#e6e9ef">
+              <line x1="130" y1="105" x2="130" y2="25"/><line x1="130" y1="105" x2="206" y2="80"/>
+              <line x1="130" y1="105" x2="177" y2="170"/><line x1="130" y1="105" x2="83" y2="170"/>
+              <line x1="130" y1="105" x2="54" y2="80"/>
+            </g>
+            <polygon points="130,58 175,89 160,150 100,148 78,88" fill="rgba(79,70,229,.16)" stroke="#4f46e5" stroke-width="2"/>
+            <g fill="#4f46e5"><circle cx="130" cy="58" r="3"/><circle cx="175" cy="89" r="3"/><circle cx="160" cy="150" r="3"/><circle cx="100" cy="148" r="3"/><circle cx="78" cy="88" r="3"/></g>
+            <g font-size="11" fill="#6b7280" font-weight="600">
+              <text x="130" y="18" text-anchor="middle">刑法</text><text x="220" y="83" text-anchor="start">民法</text>
+              <text x="180" y="184" text-anchor="middle">法理</text><text x="80" y="184" text-anchor="middle">宪法</text>
+              <text x="40" y="83" text-anchor="end">法制史</text>
+            </g>
+          </svg>
+          <div class="mt-2 flex flex-wrap justify-around gap-1 text-[11px] text-zinc-600">
+            <span>刑 <b class="text-zinc-800">58%</b> <span class="text-zinc-400">(171/295)</span></span>
+            <span>民 <b class="text-zinc-800">52%</b> <span class="text-zinc-400">(198/381)</span></span>
+            <span>法理 <b class="text-zinc-800">63%</b> <span class="text-zinc-400">(65/103)</span></span>
+            <span>宪 <b class="text-zinc-800">60%</b> <span class="text-zinc-400">(48/80)</span></span>
+            <span>法史 <b class="text-zinc-800">66%</b> <span class="text-zinc-400">(49/74)</span></span>
+          </div>
+          <div class="mt-1 text-center text-[10px] text-zinc-400">冷启动阶段 mastered=0 属正常；越检测越长出来（此处为演练值）</div>
+        </section>
+
+        <a class="flex items-center gap-3 rounded-2xl bg-amber-50 p-3 ring-1 ring-amber-200/60">
+          <div class="grid h-10 w-10 place-items-center rounded-full bg-amber-500 text-base font-bold text-white">9</div>
+          <div class="flex-1">
+            <div class="text-sm font-medium text-amber-900">待办筐 · pending</div>
+            <div class="text-[11px] text-amber-700/80">1 复验请求 · 5 弱项候选 · 3 心得候选</div>
+          </div>
+          <div class="text-amber-500">›</div>
+        </a>
+
+        <section class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+          <div class="flex items-center justify-between text-sm">
+            <span class="font-semibold text-zinc-900">⚠️ Top 5 弱项</span>
+            <a class="text-[11px] text-indigo-600">去弱项页 ›</a>
+          </div>
+          <ul class="mt-2 divide-y divide-zinc-100">
+            <li class="flex items-center gap-2 py-2 text-[13px] text-zinc-700"><span class="grid h-5 w-5 place-items-center rounded-full bg-zinc-100 text-[11px] font-medium text-zinc-600">1</span><span class="flex-1 truncate"><span class="text-zinc-400">[民]</span> 担保物权优先顺位（416 vs 质权）</span><span class="text-[11px] text-red-500">×3</span></li>
+            <li class="flex items-center gap-2 py-2 text-[13px] text-zinc-700"><span class="grid h-5 w-5 place-items-center rounded-full bg-zinc-100 text-[11px] font-medium text-zinc-600">2</span><span class="flex-1 truncate"><span class="text-zinc-400">[刑]</span> 破坏交通设施 vs 危公罪区分</span><span class="text-[11px] text-red-500">×2</span></li>
+            <li class="flex items-center gap-2 py-2 text-[13px] text-zinc-700"><span class="grid h-5 w-5 place-items-center rounded-full bg-zinc-100 text-[11px] font-medium text-zinc-600">3</span><span class="flex-1 truncate"><span class="text-zinc-400">[民]</span> 解约定金：约定即生效</span><span class="text-[11px] text-red-500">×2</span></li>
+          </ul>
+        </section>
+
+        <section class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+          <div class="text-sm font-semibold text-zinc-900">🗓️ 本周活动密度</div>
+          <div class="mt-2 grid grid-cols-7 gap-1">
+            <div class="flex flex-col items-center gap-1"><div class="grid h-9 w-full place-items-center rounded text-[11px] font-medium bg-indigo-100 text-indigo-700">3</div><div class="text-[10px] text-zinc-500">一</div></div>
+            <div class="flex flex-col items-center gap-1"><div class="grid h-9 w-full place-items-center rounded text-[11px] font-medium bg-indigo-300 text-white">6</div><div class="text-[10px] text-zinc-500">二</div></div>
+            <div class="flex flex-col items-center gap-1"><div class="grid h-9 w-full place-items-center rounded text-[11px] font-medium bg-indigo-600 text-white">12</div><div class="text-[10px] text-zinc-500">三</div></div>
+            <div class="flex flex-col items-center gap-1"><div class="grid h-9 w-full place-items-center rounded text-[11px] font-medium bg-zinc-100 text-zinc-400">—</div><div class="text-[10px] text-zinc-500">四</div></div>
+            <div class="flex flex-col items-center gap-1"><div class="grid h-9 w-full place-items-center rounded text-[11px] font-medium bg-indigo-100 text-indigo-700">3</div><div class="text-[10px] text-zinc-500">五</div></div>
+            <div class="flex flex-col items-center gap-1"><div class="grid h-9 w-full place-items-center rounded text-[11px] font-medium bg-indigo-300 text-white">9</div><div class="text-[10px] text-zinc-500">六</div></div>
+            <div class="flex flex-col items-center gap-1"><div class="grid h-9 w-full place-items-center rounded text-[11px] font-medium bg-indigo-300 text-white ring-2 ring-indigo-400">9</div><div class="text-[10px] text-zinc-500">今</div></div>
+          </div>
+          <div class="mt-1 text-[10px] text-zinc-400">数字 = 当日检测次数；颜色越深越活跃</div>
+        </section>
+      </main>
+      <div class="sticky bottom-0 flex items-stretch justify-around border-t border-zinc-200 bg-white/95 backdrop-blur">
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📖</span><span>背诵</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">💬</span><span>答疑</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📋</span><span>教练</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-indigo-600"><span class="text-lg">📊</span><span class="font-semibold">仪表盘</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">⚠️</span><span>弱项</span></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ===================== 1. 背诵清单 /recite ===================== -->
+  <div>
+    <div class="cap"><b>背诵·今日清单</b> · /recite</div>
+    <div class="phone"><div class="screen">
+      <main class="mx-auto flex max-w-md flex-col gap-3 bg-zinc-50 px-4 pb-24 pt-6">
+        <header>
+          <div class="flex items-baseline justify-between">
+            <h1 class="text-base font-semibold text-zinc-900">📅 今日背诵</h1>
+            <span class="text-[11px] text-zinc-500">2026-06-09 · 知识体系铺开</span>
+          </div>
+          <div class="mt-2 text-[12px] text-zinc-500">9 个考点 · 1 复验 / 4 到期 / 4 新 · 未学剩余 287</div>
+        </header>
+
+        <section class="flex flex-col gap-2">
+          <div class="mt-1 text-[12px] font-semibold text-violet-700">🔁 复验（答疑澄清后）<span class="ml-1 text-zinc-400">· 1</span></div>
+          <a class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="flex items-start gap-2"><span class="flex-1 text-sm font-medium text-zinc-900">紧急避险的概念和成立条件</span><span class="shrink-0 text-[11px] text-zinc-400">L2</span></div>
+            <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[10px]"><span class="rounded bg-zinc-100 px-1.5 py-0.5 text-zinc-600">刑</span><span class="rounded bg-amber-100 px-1.5 py-0.5 text-amber-700">中频</span><span class="text-zinc-400">P=7</span><span class="ml-auto text-indigo-500">开始检测 ›</span></div>
+          </a>
+        </section>
+
+        <section class="flex flex-col gap-2">
+          <div class="mt-1 text-[12px] font-semibold text-amber-700">⏰ 到期复习<span class="ml-1 text-zinc-400">· 4</span></div>
+          <a class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="flex items-start gap-2"><span class="flex-1 text-sm font-medium text-zinc-900">正当防卫的概念和成立条件</span><span class="shrink-0 text-[11px] text-zinc-400">L2</span></div>
+            <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[10px]"><span class="rounded bg-zinc-100 px-1.5 py-0.5 text-zinc-600">刑</span><span class="rounded bg-red-100 px-1.5 py-0.5 text-red-700">高频</span><span class="text-zinc-400">P=12</span><span class="ml-auto text-indigo-500">开始检测 ›</span></div>
+          </a>
+          <a class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="flex items-start gap-2"><span class="flex-1 text-sm font-medium text-zinc-900">价款超级优先权(416条)</span><span class="shrink-0 text-[11px] text-zinc-400">L1</span></div>
+            <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[10px]"><span class="rounded bg-zinc-100 px-1.5 py-0.5 text-zinc-600">民</span><span class="rounded bg-red-100 px-1.5 py-0.5 text-red-700">高频</span><span class="text-zinc-400">P=11</span><span class="ml-auto text-indigo-500">开始检测 ›</span></div>
+          </a>
+        </section>
+
+        <section class="flex flex-col gap-2">
+          <div class="mt-1 text-[12px] font-semibold text-emerald-700">🌱 新考点（配速引入）<span class="ml-1 text-zinc-400">· 4</span></div>
+          <a class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="flex items-start gap-2"><span class="flex-1 text-sm font-medium text-zinc-900">危害行为</span><span class="shrink-0 text-[11px] text-zinc-400">L1</span></div>
+            <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[10px]"><span class="rounded bg-zinc-100 px-1.5 py-0.5 text-zinc-600">刑</span><span class="rounded bg-red-100 px-1.5 py-0.5 text-red-700">高频</span><span class="text-zinc-400">P=10</span><span class="ml-auto text-indigo-500">开始检测 ›</span></div>
+          </a>
+          <a class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="flex items-start gap-2"><span class="flex-1 text-sm font-medium text-zinc-900">刑法中的因果关系</span><span class="shrink-0 text-[11px] text-zinc-400">L1</span></div>
+            <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[10px]"><span class="rounded bg-zinc-100 px-1.5 py-0.5 text-zinc-600">刑</span><span class="rounded bg-red-100 px-1.5 py-0.5 text-red-700">高频</span><span class="text-zinc-400">P=10</span><span class="ml-auto text-indigo-500">开始检测 ›</span></div>
+          </a>
+        </section>
+
+        <p class="mt-2 text-center text-[10px] text-zinc-400">优先级 P =（真题频率×3 + 弱项×2 + 科目权重）×（1+遗忘紧迫度）</p>
+      </main>
+      <div class="sticky bottom-0 flex items-stretch justify-around border-t border-zinc-200 bg-white/95 backdrop-blur">
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-indigo-600"><span class="text-lg">📖</span><span class="font-semibold">背诵</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">💬</span><span>答疑</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📋</span><span>教练</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📊</span><span>仪表盘</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">⚠️</span><span>弱项</span></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ===================== 2. 背诵答题（评分态） /recite/[kpId] ===================== -->
+  <div>
+    <div class="cap"><b>背诵·答题+评分</b> · /recite/XF-0039（L2 评分态）</div>
+    <div class="phone"><div class="screen">
+      <main class="mx-auto flex max-w-md flex-col gap-3 bg-zinc-50 px-4 pb-24 pt-6">
+        <header>
+          <a class="text-[12px] text-indigo-600">‹ 返回今日清单</a>
+          <h1 class="mt-1 text-base font-semibold text-zinc-900">正当防卫的概念和成立条件</h1>
+          <div class="mt-1 flex flex-wrap items-center gap-2 text-[11px] text-zinc-500"><span>刑法</span><span>·</span><span>当前 L2 / 封顶 L3</span><span>·</span><span>高频</span><span>·</span><span>锚 P37·行1980</span></div>
+        </header>
+
+        <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-200/60">
+          <span class="rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-medium text-violet-700">✍️ 检测 · L2 理解</span>
+          <p class="mt-2 text-[14px] font-medium leading-relaxed text-zinc-900">简述正当防卫的概念及其成立条件。</p>
+          <div class="mt-3 w-full rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-[13px] leading-relaxed text-zinc-500">正当防卫就是为了保护国家、公共利益或自己和别人的人身财产权利，对正在进行的不法侵害进行反击…（考生作答）</div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="flex items-center justify-between">
+              <span class="text-[13px] font-semibold text-zinc-900">评分结果</span>
+              <span class="rounded-full px-2.5 py-0.5 text-[12px] font-bold bg-red-100 text-red-700">未过</span>
+            </div>
+            <div class="mt-1 text-[11px] text-zinc-400">信心度 92% · anthropic/claude-4.7-opus · $0.0352（≈¥0.25）</div>
+            <p class="mt-2 text-[12.5px] leading-relaxed text-zinc-700">五大条件只答出起因和时间两项，对象、主观、限度（含特殊防卫）三大核心要件全部缺失，属核心要点重大缺失，未过。</p>
+
+            <div class="mt-3"><div class="text-[10px] font-semibold text-emerald-600">✓ 命中要点（3）</div>
+              <ul class="mt-1 space-y-0.5 text-[12px] text-zinc-600"><li>· 概念基本表述正确</li><li>· 起因条件：不法侵害实际存在</li><li>· 时间条件：正在进行，排除事前事后</li></ul></div>
+            <div class="mt-2"><div class="text-[10px] font-semibold text-red-500">✗ 缺失要点（4）—— 重点补这些</div>
+              <ul class="mt-1 space-y-0.5 text-[12px] text-zinc-600"><li>· 对象条件：针对不法侵害人本人</li><li>· 主观条件：防卫意图</li><li>· 限度条件：不得明显超过必要限度</li><li>· 特殊防卫的规定</li></ul></div>
+
+            <div class="mt-3 rounded-lg bg-zinc-50 p-2 text-[11px] text-zinc-600">
+              <div class="font-semibold">📑 证据卡（已比对教材原文）</div>
+              <div class="mt-1">grep 命中行号：1983, 1984, 1989, 1990, 1992, 1996, 1999, 2002…</div>
+              <div class="mt-0.5 text-zinc-400">来源：textbook:P37·行1980</div>
+            </div>
+
+            <div class="mt-3 rounded-lg p-2 text-[12px] font-medium bg-amber-50 text-amber-700">↻ L2 未过 → 档位 L2（同档）｜ 难度 D5→6 ｜ 间隔 1天→1天 ｜ 下次 2026-06-10</div>
+          </div>
+          <div class="flex gap-2">
+            <button class="flex-1 rounded-xl bg-zinc-100 py-2.5 text-[13px] font-medium text-zinc-700">再测一次</button>
+            <button class="flex-1 rounded-xl bg-indigo-600 py-2.5 text-[13px] font-semibold text-white">‹ 回清单选下一个</button>
+          </div>
+        </div>
+      </main>
+      <div class="sticky bottom-0 flex items-stretch justify-around border-t border-zinc-200 bg-white/95 backdrop-blur">
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-indigo-600"><span class="text-lg">📖</span><span class="font-semibold">背诵</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">💬</span><span>答疑</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📋</span><span>教练</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📊</span><span>仪表盘</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">⚠️</span><span>弱项</span></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ===================== 3. 答疑 /ask ===================== -->
+  <div>
+    <div class="cap"><b>答疑</b> · /ask（v2.3 直答版）</div>
+    <div class="phone"><div class="screen">
+      <main class="mx-auto flex max-w-md flex-col gap-3 bg-zinc-50 px-4 pb-24 pt-6">
+        <header class="flex items-baseline justify-between">
+          <h1 class="text-base font-semibold text-zinc-900">💬 答疑</h1>
+          <span class="text-[11px] text-zinc-500">v2.3 直答版 · 证据链作答</span>
+        </header>
+
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="text-[11px] text-zinc-400">科目：</span>
+          <button class="rounded-full px-2.5 py-0.5 text-[12px] bg-white text-zinc-600 ring-1 ring-zinc-200">不限</button>
+          <button class="rounded-full px-2.5 py-0.5 text-[12px] bg-indigo-600 text-white">刑法</button>
+          <button class="rounded-full px-2.5 py-0.5 text-[12px] bg-white text-zinc-600 ring-1 ring-zinc-200">民法</button>
+          <button class="rounded-full px-2.5 py-0.5 text-[12px] bg-white text-zinc-600 ring-1 ring-zinc-200">法理</button>
+          <button class="rounded-full px-2.5 py-0.5 text-[12px] bg-white text-zinc-600 ring-1 ring-zinc-200">宪法</button>
+          <button class="rounded-full px-2.5 py-0.5 text-[12px] bg-white text-zinc-600 ring-1 ring-zinc-200">法制史</button>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <div class="self-end max-w-[88%] rounded-2xl rounded-br-sm bg-indigo-600 px-3.5 py-2.5 text-[13px] leading-relaxed text-white"><span class="mr-1 rounded bg-white/20 px-1 py-0.5 text-[10px]">刑法</span>妨害信用卡管理罪能不能由单位构成？</div>
+
+          <div class="self-start w-full rounded-2xl rounded-bl-sm bg-white p-3.5 ring-1 ring-zinc-200/60">
+            <pre class="whitespace-pre-wrap break-words font-sans text-[12.5px] leading-relaxed text-zinc-800">━ 答疑预检清单 ━
+□ 1. 归类：刑法分则·妨害信用卡管理罪·概念辨析
+□ 2. 心得检索：命中刑法心得#12「无单位条款=不能单位构成」
+□ 4. 教材锚定：第3348行「177条之一…」
+□ 5. 真题锚定：2024 专基 第41题（漏选）
+━━━━━━━━━━━━━━━━
+
+【结论】不能。妨害信用卡管理罪不能由单位构成。
+
+【法理依据】刑法177条之一只规定了自然人犯罪，没有单位犯罪条款。刑法奉行「单位犯罪法定」——分则没有明文规定单位可构成的，就只能由自然人构成。
+
+【应试钥匙】判一个罪能不能单位构成，只看该条文有没有「单位犯罪条款」，别凭印象。
+
+┌─ 证据卡 ─
+│ 教材：刑法学 第3348行「177条之一」
+│ 真题：2024 专基 第41题（多选·漏选 C）
+│ 心得：刑法做题心得 #12
+│ 信心度：92%
+└─</pre>
+            <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-zinc-100 pt-2 text-[11px]">
+              <span class="text-emerald-600">信心度 92%</span>
+              <span class="text-zinc-400">grep 2 处命中</span>
+              <span class="text-zinc-400">$0.0042（≈¥0.03）</span>
+            </div>
+            <div class="mt-2 rounded-lg bg-amber-50 px-2.5 py-1.5 text-[11px] text-amber-700">🗂 本轮沉淀 1 个候选（1 心得）已进待办筐，PC 登记后生效。</div>
+          </div>
+        </div>
+
+        <div class="sticky bottom-20 mt-1 flex items-end gap-2 rounded-2xl bg-white p-2 shadow-sm ring-1 ring-zinc-200/60">
+          <textarea rows="2" placeholder="问一道题或一个概念…（Ctrl/⌘+Enter 发送）" class="flex-1 resize-none bg-transparent px-2 py-1.5 text-[13px] text-zinc-900 outline-none"></textarea>
+          <button class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-indigo-600 text-white">↑</button>
+        </div>
+      </main>
+      <div class="sticky bottom-0 flex items-stretch justify-around border-t border-zinc-200 bg-white/95 backdrop-blur">
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📖</span><span>背诵</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-indigo-600"><span class="text-lg">💬</span><span class="font-semibold">答疑</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📋</span><span>教练</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📊</span><span>仪表盘</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">⚠️</span><span>弱项</span></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ===================== 4. 弱项 /weak ===================== -->
+  <div>
+    <div class="cap"><b>弱项</b> · /weak</div>
+    <div class="phone"><div class="screen">
+      <main class="mx-auto flex max-w-md flex-col gap-3 bg-zinc-50 px-4 pb-24 pt-6">
+        <header class="flex items-baseline justify-between">
+          <h1 class="text-base font-semibold text-zinc-900">⚠️ 弱项清单</h1>
+          <div class="text-[11px] text-zinc-500">5 项</div>
+        </header>
+        <nav class="flex flex-wrap gap-1.5">
+          <a class="rounded-full px-3 py-1 text-[12px] bg-indigo-600 text-white">全部</a>
+          <a class="rounded-full px-3 py-1 text-[12px] bg-white text-zinc-600 ring-1 ring-zinc-200">刑法</a>
+          <a class="rounded-full px-3 py-1 text-[12px] bg-white text-zinc-600 ring-1 ring-zinc-200">民法</a>
+          <a class="rounded-full px-3 py-1 text-[12px] bg-white text-zinc-600 ring-1 ring-zinc-200">法理</a>
+          <a class="rounded-full px-3 py-1 text-[12px] bg-white text-zinc-600 ring-1 ring-zinc-200">宪法</a>
+          <a class="rounded-full px-3 py-1 text-[12px] bg-white text-zinc-600 ring-1 ring-zinc-200">法制史</a>
+        </nav>
+
+        <ul class="flex flex-col gap-2">
+          <li class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="flex items-start gap-2"><span class="rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-zinc-600">民法</span><span class="flex-1 text-sm font-medium text-zinc-900">价款超级优先权(416条)的优先顺位</span><span class="text-[12px] font-bold text-red-500">×3</span></div>
+            <div class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-zinc-500"><span>档位：<b class="text-zinc-700">L2</b> / 封顶 L3</span><span>D=7 · 复习 4 次</span><span>频率：高</span></div>
+            <div class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[11px]">
+              <span class="rounded px-1.5 py-0.5 text-[10px] bg-emerald-100 text-emerald-700">L1:过</span>
+              <span class="rounded px-1.5 py-0.5 text-[10px] bg-red-100 text-red-700">L2:败</span>
+              <span class="rounded px-1.5 py-0.5 text-[10px] bg-zinc-100 text-zinc-500">L3:—</span>
+              <span class="text-zinc-400">锚 P88·行1203</span><span class="text-indigo-500">下次 2026-06-10</span>
+            </div>
+            <div class="mt-1 text-[10px] text-zinc-400">MF-0142</div>
+          </li>
+          <li class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="flex items-start gap-2"><span class="rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-zinc-600">刑法</span><span class="flex-1 text-sm font-medium text-zinc-900">破坏交通设施罪 vs 危害公共安全罪</span><span class="text-[12px] font-bold text-red-500">×2</span></div>
+            <div class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-zinc-500"><span>档位：<b class="text-zinc-700">L1</b> / 封顶 L3</span><span>D=6 · 复习 2 次</span><span>频率：高</span></div>
+            <div class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[11px]">
+              <span class="rounded px-1.5 py-0.5 text-[10px] bg-red-100 text-red-700">L1:败</span>
+              <span class="rounded px-1.5 py-0.5 text-[10px] bg-zinc-100 text-zinc-500">L2:—</span>
+              <span class="rounded px-1.5 py-0.5 text-[10px] bg-zinc-100 text-zinc-500">L3:—</span>
+              <span class="text-zinc-400">锚 P156·行2890</span><span class="text-indigo-500">下次 2026-06-10</span>
+            </div>
+            <div class="mt-1 text-[10px] text-zinc-400">XF-0188</div>
+          </li>
+          <li class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="flex items-start gap-2"><span class="rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-zinc-600">民法</span><span class="flex-1 text-sm font-medium text-zinc-900">解约定金：约定即生效，无需实付</span><span class="text-[12px] font-bold text-red-500">×2</span></div>
+            <div class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-zinc-500"><span>档位：<b class="text-zinc-700">L1</b> / 封顶 L2</span><span>D=6 · 复习 3 次</span><span>频率：中</span></div>
+            <div class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[11px]">
+              <span class="rounded px-1.5 py-0.5 text-[10px] bg-red-100 text-red-700">L1:败</span>
+              <span class="rounded px-1.5 py-0.5 text-[10px] bg-zinc-100 text-zinc-500">L2:—</span>
+              <span class="text-zinc-400">锚 行2456</span>
+            </div>
+            <div class="mt-1 text-[10px] text-zinc-400">MF-0231</div>
+          </li>
+        </ul>
+      </main>
+      <div class="sticky bottom-0 flex items-stretch justify-around border-t border-zinc-200 bg-white/95 backdrop-blur">
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📖</span><span>背诵</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">💬</span><span>答疑</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📋</span><span>教练</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📊</span><span>仪表盘</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-indigo-600"><span class="text-lg">⚠️</span><span class="font-semibold">弱项</span></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ===================== 5. 待办筐 /inbox ===================== -->
+  <div>
+    <div class="cap"><b>待办筐</b> · /inbox</div>
+    <div class="phone"><div class="screen">
+      <main class="mx-auto flex max-w-md flex-col gap-3 bg-zinc-50 px-4 pb-24 pt-6">
+        <header class="flex items-baseline justify-between">
+          <h1 class="text-base font-semibold text-zinc-900">🗂 待办筐</h1>
+          <span class="text-[11px] text-zinc-500">9 条待登记</span>
+        </header>
+        <div class="rounded-xl bg-zinc-100 px-3 py-2 text-[11px] leading-relaxed text-zinc-500">📌 这些是答疑/检测自动沉淀的候选。手机端只看不改；在 PC 上「云确认 → 登记进 markdown」后才会 consumed（去重只在 PC 一处）。</div>
+
+        <section class="flex flex-col gap-2">
+          <div class="mt-1 text-[12px] font-semibold text-violet-600">🔁 复验请求<span class="ml-1 text-zinc-400">· 1</span></div>
+          <div class="text-[10.5px] text-zinc-400">答疑澄清后，背诵清单优先复验该考点（G2）</div>
+          <div class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="text-[13px] text-zinc-800">答疑澄清了正当防卫与紧急避险的区别，建议复验</div>
+            <div class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10.5px] text-zinc-400"><span class="rounded bg-zinc-100 px-1.5 py-0.5">刑法</span><span>XF-0042</span><span>来源：答疑</span><span class="ml-auto">2026/6/8</span></div>
+          </div>
+        </section>
+
+        <section class="flex flex-col gap-2">
+          <div class="mt-1 text-[12px] font-semibold text-red-600">⚠️ 弱项候选<span class="ml-1 text-zinc-400">· 5</span></div>
+          <div class="text-[10.5px] text-zinc-400">答疑/检测暴露的薄弱点，登记后进当前弱项加权</div>
+          <div class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="text-[13px] text-zinc-800">债务转移后担保人免责范围（仅免转移部分）</div>
+            <div class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10.5px] text-zinc-400"><span class="rounded bg-zinc-100 px-1.5 py-0.5">民法</span><span>来源：答疑</span><span class="ml-auto">2026/6/7</span></div>
+          </div>
+          <div class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="text-[13px] text-zinc-800">刑法的概念（连续 2 次 L1 未过）</div>
+            <div class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10.5px] text-zinc-400"><span class="rounded bg-zinc-100 px-1.5 py-0.5">刑法</span><span>XF-0001</span><span>锚 P9·行127</span><span>来源：检测</span><span class="ml-auto">2026/6/8</span></div>
+          </div>
+        </section>
+
+        <section class="flex flex-col gap-2">
+          <div class="mt-1 text-[12px] font-semibold text-sky-600">📝 心得候选<span class="ml-1 text-zinc-400">· 3</span></div>
+          <div class="text-[10.5px] text-zinc-400">可复用规律，需真题二次背书才进心得正文</div>
+          <div class="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-zinc-200/60">
+            <div class="text-[13px] text-zinc-800">判罪能否单位构成 → 只看条文有无单位犯罪条款</div>
+            <div class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10.5px] text-zinc-400"><span class="rounded bg-zinc-100 px-1.5 py-0.5">刑法</span><span>来源：答疑</span><span class="ml-auto">2026/6/9</span></div>
+          </div>
+        </section>
+      </main>
+      <div class="sticky bottom-0 flex items-stretch justify-around border-t border-zinc-200 bg-white/95 backdrop-blur">
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📖</span><span>背诵</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">💬</span><span>答疑</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📋</span><span>教练</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-indigo-600"><span class="text-lg">📊</span><span class="font-semibold">仪表盘</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">⚠️</span><span>弱项</span></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ===================== 6. 教练 /coach（占位） ===================== -->
+  <div>
+    <div class="cap"><b>教练</b> · /coach（占位·建设中）</div>
+    <div class="phone"><div class="screen">
+      <main class="mx-auto flex max-w-md flex-col gap-4 bg-zinc-50 px-4 pb-24 pt-6">
+        <header class="flex items-baseline justify-between">
+          <h1 class="text-base font-semibold text-zinc-900">📋 教练</h1>
+          <span class="text-[11px] text-zinc-500">宏观规划 · 建设中</span>
+        </header>
+        <div class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-zinc-200/60">
+          <div class="text-3xl">🚧</div>
+          <h2 class="mt-2 text-sm font-semibold text-zinc-900">教练模块规划中（T1）</h2>
+          <p class="mt-2 text-[12.5px] leading-relaxed text-zinc-500">这里是<b>宏观层</b>（科目 / 章节 / 轮次级），与背诵的微观层（考点级）分工。设想：你丢一句「今天刑法第 5 章听课」，系统给四段——</p>
+          <ul class="mt-3 space-y-2 text-[12.5px] text-zinc-600">
+            <li>① <b>即时点拨</b>：这一章的命门 / 易混点</li>
+            <li>② <b>进度归位</b>：你在配速线的哪、落后没</li>
+            <li>③ <b>下一步规划</b>：推荐做什么（你拍板，不替你决定）</li>
+            <li>④ <b>复盘提取</b>：把暴露的弱项投进待办筐</li>
+          </ul>
+          <p class="mt-3 text-[11px] text-zinc-400">只覆盖法硕 5 科；政治/英语你自管（系统不盯，避免代劳）。</p>
+        </div>
+      </main>
+      <div class="sticky bottom-0 flex items-stretch justify-around border-t border-zinc-200 bg-white/95 backdrop-blur">
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📖</span><span>背诵</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">💬</span><span>答疑</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-indigo-600"><span class="text-lg">📋</span><span class="font-semibold">教练</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">📊</span><span>仪表盘</span></div>
+        <div class="flex flex-1 flex-col items-center gap-0.5 py-2 text-xs text-zinc-500"><span class="text-lg">⚠️</span><span>弱项</span></div>
+      </div>
+    </div></div>
+  </div>
+
+</div>
+
+<p style="text-align:center;color:#64748b;font-size:11.5px;padding:8px 20px 40px;line-height:1.7">
+  ⚠️ 静态效果图 · 基于真实页面（src/app 下 RSC/client 组件）的样式快照，数据为演练值。<br>
+  实际运行：<code style="color:#94a3b8">cd D:\fashuo-app &amp;&amp; npm run dev</code> → 浏览器开 localhost:3000。<br>
+  真实数据来自 Supabase（kp_state 933 考点 / events 待办筐 / detection_log）。
+</p>
+</body>
+</html>
